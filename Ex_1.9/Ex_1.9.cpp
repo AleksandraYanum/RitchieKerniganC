@@ -11,19 +11,13 @@ int main()
 			if (prev != ' ')
 			{
 				putchar(c);
-				prev = c;
-			}
-			else
-			{
-				prev = c;
 			}
 		}
 		else
 		{
 			putchar(c);
-			prev = c;
 		}
-		
+		prev = c;
 	}
 	return 0;
 }
