@@ -4,23 +4,24 @@ int main()
 /* don't print more than 1 space together*/
 
 {
-	int prev, c;
-	prev = 0;
+	int c, space;
 	while ((c = getchar()) != EOF)
 	{
-		if (c == ' ')
+		if (c != ' ')
 		{
-			if (prev != ' ')
-			{
-				putchar(c);
-			}
+			space = 0;
 		}
 		else
 		{
+			space++;
+		}
+		if (space <= 1)
+		{
 			putchar(c);
 		}
-		prev = c;
 	}
 	return 0;
 }
 
+		
+		
