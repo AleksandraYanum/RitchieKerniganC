@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 /* replace tab with "\t", space with "\b", backslash with "\\" */
@@ -11,24 +12,19 @@ int main()
         {
             printf("\\t");
         }
+        else if (c == ' ')
+        {
+            printf("\\b");
+        }
+        else if (c == '\\')
+        {
+            printf("\\\\");
+        }
         else
         {
-            if (c == ' ')
-            {
-                printf("\\b");
-            }
-            else
-            {
-                if (c == '\\')
-                {
-                    printf("\\\\");
-                }
-                else
-                {
-                    putchar(c);
-                }
-            }
+            putchar(c);
         }
+
     }
     return 0;
 }
