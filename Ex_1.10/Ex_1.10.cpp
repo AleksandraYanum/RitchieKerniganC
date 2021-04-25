@@ -11,17 +11,24 @@ int main()
         {
             printf("\\t");
         }
-        else if (c == ' ')
+        else
+        {
+            if (c == ' ')
             {
                 printf("\\b");
             }
-        else if (c == '\\')
+            else
             {
-            printf("\\\\");
+                if (c == '\\')
+                {
+                    printf("\\\\");
+                }
+                else
+                {
+                    putchar(c);
+                }
             }
-        else putchar(c);
+        }
     }
     return 0;
 }
-
-
