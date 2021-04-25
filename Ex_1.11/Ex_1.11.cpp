@@ -9,7 +9,12 @@ int main()
 	while ((c = getchar()) != EOF)
 	{
 		nc++;
+		if (c == '\n')
+		{
+			nl++;
+		}
 	}
-	printf ("Symbol count = %d\n", nc);
+	printf ("Symbols count = %d\n", nc);
+	printf("Lines count = %d\n", nl);
 	return 0;
 }
