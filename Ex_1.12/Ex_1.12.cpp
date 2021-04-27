@@ -17,7 +17,7 @@ int main()
 			state = OUT;
 			printf("\n");
 		}
-		else if (state = OUT)
+		else
 		{
 			state = IN;
 			putchar(c);
