@@ -27,10 +27,11 @@ int main()
 		}
 	}
 
-	printf("Digits: ");
+	printf("Digits: \n");
 	for (i = 0; i < 10; i++)
 	{
-		printf("%d ", ndigit[i]);
+		printf("%d - ", i);
+		printf ("%d\n", ndigit[i]);
 	}
 
 	printf("\nWhite spaces (space, tab, ent): %d", nspace);
