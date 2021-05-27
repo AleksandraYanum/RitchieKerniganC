@@ -2,7 +2,7 @@
 
 # define IN 1 /* in the word*/
 # define OUT 2 /* out of the word*/
-# define MAXSIZE 10 /* max length of input words*/
+# define MAXSIZE 10 /* max possible length of input words*/
 # define SIZE 4 /* array size of words with length from 2 to 5 symbols */
 # define SYMB '*' /* symbol of histogram */
 
@@ -10,10 +10,12 @@
 
 int main()
 {
-	int i, k, c, nc, state;
+	int i, k, c, nc, state, maxlen;
 	state = OUT;
+	maxlen = 0;
 	nc = 0;
 	int hist[MAXSIZE];
+	
 	/*
 	int histrev[MAXSIZE];
 	int hist2_5[4];
@@ -58,8 +60,20 @@ int main()
 			state = IN;
 			nc++;
 		}
+
 	}
+	
+	for (i = 0; i < MAXSIZE; i++)
+	{
+		if (hist[i] > maxlen)
+		{
+			maxlen = hist[i];
+		}
+	}
+	
+	printf("Max number - %d, index - %d", maxlen, i);
 	printf ("Amount of words with certain length:\n");
+	/*
 	for (i = 0; i < MAXSIZE; i++)
 	{
 		printf("%d - ", i + 1);
@@ -69,6 +83,13 @@ int main()
 		}
 		putchar('\n');
 	}
-
+	*/
+	for (i = 0; i < MAXSIZE; i++)
+	{
+		printf("%d ", i + 1);
+	}
+	printf("\n");
+	
+		
 	return 0;
 }
