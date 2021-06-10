@@ -32,9 +32,8 @@ int main()
 
 int getline(char s[], int lim)
 {
-	int  i, k, n, space;
+	int  i, n, space;
 	int c;
-	k = 0;
 	n = 0;
 	space = 0;
 	for (i = 0; ((c = getchar()) != EOF) && c != '\n'; i++)
@@ -48,7 +47,6 @@ int getline(char s[], int lim)
 					s[n] = c;
 					n++;
 					space = 1;
-					k = n + 1;
 				}
 			}
 			else
@@ -56,7 +54,6 @@ int getline(char s[], int lim)
 				space = 0;
 				s[n] = c;
 				n++;
-				k = n + 1;
 			}
 		}
 
@@ -74,6 +71,6 @@ int getline(char s[], int lim)
 		i++;
 	}
 
-	s[k] = '\0';
+	s[n+1] = '\0';
 	return i;
 }
