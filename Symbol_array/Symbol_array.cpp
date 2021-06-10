@@ -13,7 +13,7 @@ int main()
 	int max; /* length of max readed line */
 	char line[MAXLINE]; /* current line */
 	char longest[MAXLINE]; /* the longest line */
-	len = max = 0;
+	max = 0;
 	while ((len = getline (line, MAXLINE)) > 0)
 	{
 		if (len > max)
