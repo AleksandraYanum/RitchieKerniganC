@@ -11,12 +11,20 @@ int main()
 	int len; /* length of current line */
 	char line[MAXLINE]; /* current line */
 
-	printf("Please, print the line (not longer than 1000 symbols):\n");
+	printf ("Please, print the line (not longer than 1000 symbols):\n");
 
 	while ((len = getline(line, MAXLINE)) > 0)
 	{
-		printf("Your line was formatted:\n");
-		printf("%s", line);
+		if (len > 1)
+		{
+			printf("Your line was formatted:\n");
+			printf("%s", line);
+			printf("Print another line.\n");
+		}
+		else
+		{
+			printf("Your line is empty. Please, print another line.\n");
+		}
 	}
 
 	return 0;
@@ -57,7 +65,11 @@ int getline(char s[], int lim)
 	{
 		if (i < (lim - 1))
 		{
-			s[n] = c;
+			if (n > 0)
+			{
+				s[n] = c;
+			}
+		
 		}
 		i++;
 	}
