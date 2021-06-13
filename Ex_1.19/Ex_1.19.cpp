@@ -32,14 +32,17 @@ int main()
 void reverse(char s[])
 {
 	int i;
-	int temp, size;
+	int temp, size, delta;
 
 	i = 0;
 
 	size = strlen(s);
+	delta = size % 2;
+	
 	for (i = 0; i < (size / 2); i++)
 	{
-		swap(s, i, size - 1 - i);
+		
+		swap(s, i, size / 2 + i + delta); 
 	}
 
 	return;
