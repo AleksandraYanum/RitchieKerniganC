@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* detap: print certain amount os cpaces insted tabs*/
+/* detab: print certain amount of spaces insted tabs*/
 
 void print_space(int count);
 
