@@ -3,7 +3,7 @@
 # define IN 1 /* in the word*/
 # define OUT 0 /* out of the word*/
 
-/* entab: prints certain amount of tabs insted spaces  */
+/* entab: prints certain amount of tabs instead of spaces  */
 
 void print_tab_space (int tab_to_print, int space_to_print);
 void print_symbol(int c, int n);
@@ -11,12 +11,11 @@ void print_symbol(int c, int n);
 int main()
 {
 	int len_tab = 8; /* length of tab (8 by default) */
-	int i = 0; /* position of current symbol */
-	int c, space_count, state, tab_to_print, r, space_to_print;
+	// int i = 0; /* position of current symbol */
+	int c, space_count, state, tab_to_print, space_to_print;
 	space_count = 0;
 	tab_to_print = 0;
 	space_to_print = 0;
-	r = 0;
 	state = OUT;
 	while ((c = getchar()) != EOF)
 	{
