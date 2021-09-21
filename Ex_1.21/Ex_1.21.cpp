@@ -48,7 +48,6 @@ int main()
 			}
 			
 			putchar(c);
-			
 		}
 		pos++;
 	}
