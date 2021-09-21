@@ -25,13 +25,19 @@ int main()
 		{
 			if (state == IN)
 			{
-				last = pos;
+				last = pos - 1;
 				state = OUT;
 			}
+			pos++;
 			
 		}
-		else
+		else if (c == '\n')
 		{
+			pos = 0;
+			putchar(c);
+		}
+		else
+		{			
 			if (state == OUT)
 			{
 				state = IN;
@@ -48,12 +54,13 @@ int main()
 				*/
 
 				first = last = 0;
+
 				
 			}
-			
+			pos++;
 			putchar(c);
 		}
-		pos++;
+		
 	}
 	
 	return 0;
@@ -80,6 +87,10 @@ void spaces2tabs(int last, int first, int len_tab)
 	int all_tabs = first / len_tab; // how many tab positions are there from the line beginning
 	int tab_to_print = all_tabs - past_tabs;
 	int space_to_print = first % len_tab;
+	if (tab_to_print == 0)
+	{
+		space_to_print--;
+	}
 	print_tab_space(tab_to_print, space_to_print);
 
 	return;
