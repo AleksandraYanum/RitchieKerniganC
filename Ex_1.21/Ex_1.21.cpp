@@ -12,15 +12,13 @@ void spaces2tabs(int last, int first, int len_tab);
 int main()
 {
 	int len_tab = 8; // length of tab (8 by default)
-	int state, tab_to_print, space_to_print;
+	int state;
 	int pos = 0; // position of current symbol;
 	int first = 0; // position of the first letter of the next word (after spaces)
 	int last = 0; // position of the last letter of the previous word (before spaces)
-	int past_tabs, all_tabs;
 	char c; // input
-	past_tabs = all_tabs = 0;
-	tab_to_print = space_to_print = 0;
 	state = OUT;
+
 	while ((c = getchar()) != EOF)
 	{
 		if (c == ' ')
