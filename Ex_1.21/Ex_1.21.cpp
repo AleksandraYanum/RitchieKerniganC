@@ -7,6 +7,7 @@
 
 void print_tab_space (int tab_to_print, int space_to_print);
 void print_symbol(int c, int n);
+void spaces2tabs(int last, int first, int len_tab);
 
 int main()
 {
@@ -37,12 +38,17 @@ int main()
 			{
 				state = IN;
 				first = pos;
-				// change spaces into tabs:
+
+				spaces2tabs(last, first, len_tab);
+
+				/*
 				past_tabs = last / len_tab; // how many tab positions have we already passed
 				all_tabs = first / len_tab; // how many tab positions are there from the line beginning
 				tab_to_print = all_tabs - past_tabs;
 				space_to_print = first % len_tab;
 				print_tab_space(tab_to_print, space_to_print);
+				*/
+
 				first = last = 0;
 				
 			}
@@ -67,5 +73,16 @@ void print_symbol(int c, int n)
 	{
 		putchar(c);
 	}
+	return;
+}
+
+void spaces2tabs(int last, int first, int len_tab)
+{
+	int past_tabs = last / len_tab; // how many tab positions have we already passed
+	int all_tabs = first / len_tab; // how many tab positions are there from the line beginning
+	int tab_to_print = all_tabs - past_tabs;
+	int space_to_print = first % len_tab;
+	print_tab_space(tab_to_print, space_to_print);
+
 	return;
 }
