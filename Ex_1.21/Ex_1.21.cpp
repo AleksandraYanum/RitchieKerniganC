@@ -22,7 +22,6 @@ int main()
 	state = OUT;
 	while ((c = getchar()) != EOF)
 	{
-		pos++;
 		if (c == ' ')
 		{
 			if (state == IN)
@@ -49,7 +48,9 @@ int main()
 			}
 			
 			putchar(c);
+			
 		}
+		pos++;
 	}
 	
 	return 0;
