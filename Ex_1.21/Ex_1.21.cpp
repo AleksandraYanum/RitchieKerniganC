@@ -83,13 +83,18 @@ void print_symbol(int c, int n)
 
 void spaces2tabs(int last, int first, int len_tab)
 {
+	int space_to_print = 0;
 	int past_tabs = last / len_tab; // how many tab positions have we already passed
 	int all_tabs = first / len_tab; // how many tab positions are there from the line beginning
 	int tab_to_print = all_tabs - past_tabs;
-	int space_to_print = first % len_tab;
+	
 	if (tab_to_print == 0)
 	{
-		space_to_print--;
+		space_to_print = first - last -1;
+	}
+	else
+	{
+		space_to_print = first % len_tab;
 	}
 	print_tab_space(tab_to_print, space_to_print);
 
