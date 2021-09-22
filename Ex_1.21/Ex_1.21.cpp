@@ -88,9 +88,9 @@ void spaces2tabs(int last, int first, int len_tab)
 	int all_tabs = first / len_tab; // how many tab positions are there from the line beginning
 	int tab_to_print = all_tabs - past_tabs;
 	
-	if (tab_to_print == 0)
+	if ((tab_to_print == 0) && (first != 0))
 	{
-		space_to_print = first - last -1;
+		space_to_print = first - last - 1;
 	}
 	else
 	{
