@@ -22,6 +22,12 @@ int main()
 			}
 
 		}
+		else if (c == '\n')
+		{
+			putchar(c);
+			slash_count = 0;
+			state = OUT;
+		}
 		else
 		{
 			if (slash_count == 1)
