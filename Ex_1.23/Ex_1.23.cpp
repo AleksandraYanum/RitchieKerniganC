@@ -4,6 +4,7 @@
 
 # define IN 1 // in the comment
 # define OUT 0 // out of the comment
+# define SINGLE_COMMENT_SLASH_COUNT 2 // amount of slashes that create comment
 
 int main()
 {
@@ -17,7 +18,7 @@ int main()
 		if (c == '/')
 		{
 			slash_count++;
-			if (slash_count == 4)
+			if (slash_count == SINGLE_COMMENT_SLASH_COUNT)
 			{
 				state = IN;
 			}
@@ -31,7 +32,7 @@ int main()
 		}
 		else
 		{
-			if (slash_count < 4)
+			if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
 			{
 				for (i = 0; i < slash_count; i++)
 				{
