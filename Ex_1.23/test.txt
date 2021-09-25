@@ -1,0 +1,4 @@
+int a;
+int a; //program
+int a/b;
+int a/b; //program
