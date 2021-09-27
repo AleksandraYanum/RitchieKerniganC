@@ -1,4 +1,4 @@
-int a;
-int a; //program
-int a/b; /program
-int a/b; //program
+a /*abc
+abc
+abc*/
+a

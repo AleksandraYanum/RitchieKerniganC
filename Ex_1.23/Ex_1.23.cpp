@@ -9,6 +9,7 @@
 int main()
 {
 	int slash_count = 0; // count of slashes that are standing in a ROW
+	int asterisk_count = 0; // count of '*'
 	int state = OUT; // IN or OUT (of) the comment
 	char c; // input
 	int i = 0;
@@ -26,22 +27,51 @@ int main()
 		}
 		else if (c == '\n')
 		{
-			putchar(c);
-			slash_count = 0;
-			state = OUT;
+			if (state == OUT)
+			{
+				putchar(c);
+				slash_count = 0;
+			}
+			else
+			{
+				if ((slash_count > 1) && (slash_count <= SINGLE_COMMENT_SLASH_COUNT))
+				{
+					state = OUT;
+					putchar(c);
+					slash_count = 0;
+				}
+			}
+		}
+		else if (c == '*')
+		{
+			asterisk_count++;
+			if (slash_count == 1)
+			{
+				state = IN;
+			}
 		}
 		else
 		{
-			if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
+			/* if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
 			{
 				for (i = 0; i < slash_count; i++)
 				{
 					putchar('/');
 				}
 				slash_count = 0;
-			}
+				asterisk_count = 0; */
+			
 			if (state == OUT)
 			{
+				if ((slash_count !=0) && (slash_count < SINGLE_COMMENT_SLASH_COUNT))
+				{
+					for (i = 0; i < slash_count; i++)
+					{
+						putchar('/');
+					}
+					slash_count = 0;
+					asterisk_count = 0;
+				}
 				putchar(c);
 			}
 		}
