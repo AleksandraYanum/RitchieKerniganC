@@ -6,11 +6,17 @@
 # define OUT 0 // out of the comment
 # define SINGLE_COMMENT_SLASH_COUNT 2 // amount of slashes that create comment
 
+// ###########################################################################
+// global variables
+// ###########################################################################
+
+int one_line_comment = OUT; // IN or OUT (of) the one-line comment (begins with '//')
+int multi_line_comment = OUT; // IN or OUT (of) the multi-line comment (begins with '/*' and ends with '*/')
+
+
 int main()
 {
 	int slash_count = 0; // count of slashes that are standing in a ROW
-	int one_line_comment = OUT; // IN or OUT (of) the one-line comment (begins with '//')
-	int multi_line_comment = OUT; // IN or OUT (of) the multi-line comment (begins with '/*' and ends with '*/')
 	char c; // input
 	char prev_symb = 0; //previous symbol
 	
@@ -18,7 +24,8 @@ int main()
 	{
 		if (c == '/')
 		{
-			if ((multi_line_comment == OUT) && (one_line_comment == OUT))
+			if //(out_of_comment())
+				((multi_line_comment == OUT) && (one_line_comment == OUT))
 			{
 				slash_count++;
 				if (slash_count == SINGLE_COMMENT_SLASH_COUNT)
