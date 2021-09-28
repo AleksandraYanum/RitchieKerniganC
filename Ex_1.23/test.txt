@@ -14,3 +14,10 @@ ab
 9. fghgf /* fjhgj // /*  
     hjgjg /*   hhjg /// */ tail 
 10. ab/ //h
+11. printf("abc")
+12. printf("//abc")
+13. printf("abc/*def)"
+14. abc "ab//de"
+15. abc "a /*def*/"
+16. printf("abc/*def)
+abc "ab//de"
