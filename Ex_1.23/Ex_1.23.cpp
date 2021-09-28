@@ -13,6 +13,12 @@
 int one_line_comment = OUT; // IN or OUT (of) the one-line comment (begins with '//')
 int multi_line_comment = OUT; // IN or OUT (of) the multi-line comment (begins with '/*' and ends with '*/')
 
+// ###########################################################################
+// functions
+// ###########################################################################
+
+int out_of_comment();
+
 
 int main()
 {
@@ -24,8 +30,7 @@ int main()
 	{
 		if (c == '/')
 		{
-			if //(out_of_comment())
-				((multi_line_comment == OUT) && (one_line_comment == OUT))
+			if (out_of_comment())
 			{
 				slash_count++;
 				if (slash_count == SINGLE_COMMENT_SLASH_COUNT)
@@ -41,7 +46,7 @@ int main()
 
 		else if (c == '\n')
 		{
-			if ((multi_line_comment == OUT) && (one_line_comment == OUT))
+			if (out_of_comment())
 			{
 				putchar(c);
 				slash_count = 0;
@@ -55,7 +60,7 @@ int main()
 
 		else if (c == '*')
 		{
-			if ((multi_line_comment == OUT) && (one_line_comment == OUT))
+			if (out_of_comment())
 			{
 				if (prev_symb == '/')
 				{
@@ -70,7 +75,7 @@ int main()
 
 		else //other symbols
 		{
-			if ((one_line_comment == OUT) && (multi_line_comment == OUT))
+			if (out_of_comment())
 			{
 				if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
 				{
@@ -87,4 +92,15 @@ int main()
 		prev_symb = c;
 	}
 	return 0;
+}
+
+
+int out_of_comment()
+{
+	int result = 0;
+	if ((multi_line_comment == OUT) && (one_line_comment == OUT))
+	{
+		result = 1;
+	}
+	return result;
 }
