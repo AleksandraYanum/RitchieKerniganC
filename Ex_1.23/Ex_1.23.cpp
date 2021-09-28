@@ -23,6 +23,7 @@ char c; // input
 int out_of_comment();
 void slash_handler();
 void enter_handler();
+void asterisk_handler();
 
 // ###########################################################################
 
@@ -42,18 +43,7 @@ int main()
 
 		else if (c == '*')
 		{
-			//asterisk_handler();
-			if (out_of_comment())
-			{
-				if (prev_symb == '/')
-				{
-					multi_line_comment = IN;
-				}
-				else
-				{
-					putchar(c);
-				}
-			}
+			asterisk_handler();
 		}
 
 		else //other symbols
@@ -117,6 +107,22 @@ void enter_handler()
 	{
 		one_line_comment = OUT;
 		putchar(c);
+	}
+	return;
+}
+
+void asterisk_handler()
+{
+	if (out_of_comment())
+	{
+		if (prev_symb == '/')
+		{
+			multi_line_comment = IN;
+		}
+		else
+		{
+			putchar(c);
+		}
 	}
 	return;
 }
