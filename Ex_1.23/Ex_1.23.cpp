@@ -12,36 +12,27 @@
 
 int one_line_comment = OUT; // IN or OUT (of) the one-line comment (begins with '//')
 int multi_line_comment = OUT; // IN or OUT (of) the multi-line comment (begins with '/*' and ends with '*/')
+int slash_count = 0; // count of slashes that are standing in a ROW
+char prev_symb = 0; //previous symbol
 
 // ###########################################################################
 // functions
 // ###########################################################################
 
 int out_of_comment();
+void slash_handler();
 
+// ###########################################################################
 
 int main()
 {
-	int slash_count = 0; // count of slashes that are standing in a ROW
 	char c; // input
-	char prev_symb = 0; //previous symbol
-	
+		
 	while ((c = getchar()) != EOF)
 	{
 		if (c == '/')
 		{
-			if (out_of_comment())
-			{
-				slash_count++;
-				if (slash_count == SINGLE_COMMENT_SLASH_COUNT)
-				{
-					one_line_comment = IN;
-				}
-			}
-			else if ((multi_line_comment == IN) && (prev_symb == '*'))
-			{
-				multi_line_comment = OUT;
-			}
+			slash_handler();
 		}
 
 		else if (c == '\n')
@@ -103,4 +94,21 @@ int out_of_comment()
 		result = 1;
 	}
 	return result;
+}
+
+void slash_handler()
+{
+	if (out_of_comment())
+	{
+		slash_count++;
+		if (slash_count == SINGLE_COMMENT_SLASH_COUNT)
+		{
+			one_line_comment = IN;
+		}
+	}
+	else if ((multi_line_comment == IN) && (prev_symb == '*'))
+	{
+		multi_line_comment = OUT;
+	}
+	return;
 }
