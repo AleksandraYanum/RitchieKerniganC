@@ -1,4 +1,15 @@
-a /*abc
+1. abc /*abc
+def*/
 abc
-abc*/
-a
+2. abc//def
+3. a/b //abc
+4. a/b /abc
+5. abc /*abc*/
+6. abc /*abc //abc /ab
+abc def /ac//e */   dfgdf
+7.  hhh /*
+def
+8.vv//ab */
+ab
+9. fghgf /* fjhgj // /*  
+    hjgjg /*   hhjg /// */ tail 

@@ -9,73 +9,76 @@
 int main()
 {
 	int slash_count = 0; // count of slashes that are standing in a ROW
-	int asterisk_count = 0; // count of '*'
-	int state = OUT; // IN or OUT (of) the comment
+	int one_line_comment = OUT; // IN or OUT (of) the one-line comment (begins with '//')
+	int multi_line_comment = OUT; // IN or OUT (of) the multi-line comment (begins with '/*' and ends with '*/')
 	char c; // input
+	char prev_symb = 0; //previous symbol
 	int i = 0;
 
 	while ((c = getchar()) != EOF)
 	{
 		if (c == '/')
 		{
-			slash_count++;
-			if (slash_count == SINGLE_COMMENT_SLASH_COUNT)
+			if ((multi_line_comment == OUT) && (one_line_comment == OUT))
 			{
-				state = IN;
+				slash_count++;
+				if (slash_count == SINGLE_COMMENT_SLASH_COUNT)
+				{
+					one_line_comment = IN;
+				}
 			}
-
+			else if ((multi_line_comment == IN) && (prev_symb == '*'))
+			{
+				multi_line_comment = OUT;
+			}
 		}
+
 		else if (c == '\n')
 		{
-			if (state == OUT)
+			if ((multi_line_comment == OUT) && (one_line_comment == OUT))
 			{
 				putchar(c);
 				slash_count = 0;
 			}
-			else
+			else if (one_line_comment == IN)
 			{
-				if ((slash_count > 1) && (slash_count <= SINGLE_COMMENT_SLASH_COUNT))
-				{
-					state = OUT;
-					putchar(c);
-					slash_count = 0;
-				}
+				one_line_comment = OUT;
+				putchar(c);
 			}
 		}
+
 		else if (c == '*')
 		{
-			asterisk_count++;
-			if (slash_count == 1)
+			if ((multi_line_comment == OUT) && (one_line_comment == OUT))
 			{
-				state = IN;
+				if (prev_symb == '/')
+				{
+					multi_line_comment = IN;
+				}
+				else
+				{
+					putchar(c);
+				}
 			}
 		}
-		else
+
+		else //other symbols
 		{
-			/* if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
+			if ((one_line_comment == OUT) && (multi_line_comment == OUT))
 			{
-				for (i = 0; i < slash_count; i++)
-				{
-					putchar('/');
-				}
-				slash_count = 0;
-				asterisk_count = 0; */
-			
-			if (state == OUT)
-			{
-				if ((slash_count !=0) && (slash_count < SINGLE_COMMENT_SLASH_COUNT))
+				if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
 				{
 					for (i = 0; i < slash_count; i++)
 					{
 						putchar('/');
 					}
-					slash_count = 0;
-					asterisk_count = 0;
 				}
 				putchar(c);
+				slash_count = 0;
 			}
 		}
-	}
 
+		prev_symb = c;
+	}
 	return 0;
 }
