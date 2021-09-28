@@ -13,8 +13,7 @@ int main()
 	int multi_line_comment = OUT; // IN or OUT (of) the multi-line comment (begins with '/*' and ends with '*/')
 	char c; // input
 	char prev_symb = 0; //previous symbol
-	int i = 0;
-
+	
 	while ((c = getchar()) != EOF)
 	{
 		if (c == '/')
@@ -68,7 +67,7 @@ int main()
 			{
 				if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
 				{
-					for (i = 0; i < slash_count; i++)
+					for (int i = 0; i < slash_count; i++)
 					{
 						putchar('/');
 					}
