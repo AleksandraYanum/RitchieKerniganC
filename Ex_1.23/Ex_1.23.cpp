@@ -24,6 +24,7 @@ int out_of_comment();
 void slash_handler();
 void enter_handler();
 void asterisk_handler();
+void default_handler();
 
 // ###########################################################################
 
@@ -48,19 +49,7 @@ int main()
 
 		else //other symbols
 		{
-			//default_handler();
-			if (out_of_comment())
-			{
-				if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
-				{
-					for (int i = 0; i < slash_count; i++)
-					{
-						putchar('/');
-					}
-				}
-				putchar(c);
-				slash_count = 0;
-			}
+			default_handler();
 		}
 
 		prev_symb = c;
@@ -123,6 +112,23 @@ void asterisk_handler()
 		{
 			putchar(c);
 		}
+	}
+	return;
+}
+
+void default_handler()
+{
+	if (out_of_comment())
+	{
+		if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
+		{
+			for (int i = 0; i < slash_count; i++)
+			{
+				putchar('/');
+			}
+		}
+		putchar(c);
+		slash_count = 0;
 	}
 	return;
 }
