@@ -21,3 +21,8 @@ ab
 15. abc "a /*def*/"
 16. printf("abc/*def)
 abc "ab//de"
+17. printf('abc')
+18. printf("abc'//abc)
+19. printf("abc\"abc")
+20. printf("abc\"/*comment*/")
+21. printf("abc'//abc)"

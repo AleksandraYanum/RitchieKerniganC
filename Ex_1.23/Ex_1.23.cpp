@@ -15,6 +15,7 @@ int multi_line_comment = OUT; // IN or OUT (of) the multi-line comment (begins w
 int str = OUT; // IN or OUT (of) the printed string
 int slash_count = 0; // count of slashes that are standing in a ROW
 char prev_symb = 0; //previous symbol
+char prev_quote = 0; //type of previous quote (it can be " or ')
 char c; // input
 
 // ###########################################################################
@@ -26,7 +27,7 @@ void slash_handler();
 void enter_handler();
 void asterisk_handler();
 void default_handler();
-void double_quote_handler();
+void quote_handler();
 
 // ###########################################################################
 
@@ -49,9 +50,9 @@ int main()
 			asterisk_handler();
 		}
 
-		else if (c == '"')
+		else if ((c == '"') || (c == '\''))
 		{
-			double_quote_handler();
+			quote_handler();
 		}
 
 		else //other symbols
@@ -168,18 +169,25 @@ void default_handler()
 	return;
 }
 
-void double_quote_handler()
+void quote_handler()
 {
 	if (out_of_comment())
 	{
 		if (str == OUT)
 		{
 			str = IN;
+			prev_quote = c;
 		}
 		else
 		{
-			str = OUT;
+			if (c == prev_quote)
+			{
+				str = OUT;
+				prev_quote = 0;
+			}
 		}
+		putchar(c);
 	}
+	
 	return;
 }
