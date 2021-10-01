@@ -173,17 +173,20 @@ void quote_handler()
 {
 	if (out_of_comment())
 	{
-		if (str == OUT)
+		if (prev_symb != '\\')
 		{
-			str = IN;
-			prev_quote = c;
-		}
-		else
-		{
-			if (c == prev_quote)
+			if (str == OUT)
 			{
-				str = OUT;
-				prev_quote = 0;
+				str = IN;
+				prev_quote = c;
+			}
+			else
+			{
+				if (c == prev_quote)
+				{
+					str = OUT;
+					prev_quote = 0;
+				}
 			}
 		}
 		putchar(c);
