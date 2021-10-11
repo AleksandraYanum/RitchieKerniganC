@@ -141,6 +141,10 @@
   <ItemGroup>
     <ClCompile Include="Ex_1.24.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
+    <Text Include="test_cases.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
