@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 /* program checks a C program for syntax errors like unbalanced brackets */
+// test commit
 
 # define OPENING_BRACKET '{'
 # define CLOSING_BRACKET '}'
