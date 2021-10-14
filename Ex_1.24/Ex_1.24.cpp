@@ -24,7 +24,7 @@ int main()
 
 	while (((c = getchar()) != EOF) && (is_error == 0))
 	{
-		if (c == '{')							//|| (c == '[') || (c == '('))
+		if ((c == '{') || (c == '['))						//|| (c == '[') || (c == '('))
 		{
 			bracket[pos] = c;
 			pos++;
@@ -33,6 +33,19 @@ int main()
 		else if (c == '}')
 		{
 			if ((pos > 0) && (bracket[pos - 1] == '{'))
+			{
+				bracket[pos - 1] = 0;
+				pos--;
+			}
+			else
+			{
+				is_error = 1;
+			}
+		}
+
+		else if (c == ']')
+		{
+			if ((pos > 0) && (bracket[pos - 1] == '['))
 			{
 				bracket[pos - 1] = 0;
 				pos--;
