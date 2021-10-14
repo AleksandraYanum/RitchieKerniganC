@@ -2,20 +2,26 @@
 #include <stdlib.h>
 
 /* program checks a C program for syntax errors like unbalanced brackets */
-// test commit
 
-# define OPENING_BRACKET '{'
-# define CLOSING_BRACKET '}'
 # define MAXSIZE 10 //max size of the array with opening brackets
 
+// ###########################################################################
+// functions
+// ###########################################################################
+
+void bracket_handler(char bracket_type);
+
+// ###########################################################################
+// global variables
+// ###########################################################################
+
+int pos = 0; //position of array elements
+char bracket[MAXSIZE];
+int is_error = 0; // 1 - error, 0 - not error
 
 int main()
 {
-	//int bracket_count = 0; // count paired brackets: +1 if opening braket; -1 if closing bracket
 	char c; //input
-	char bracket[MAXSIZE];
-	int pos = 0; //position of array elements
-	int is_error = 0; // 1 - error, 0 - not error
 
 	for (int i = 0; i < MAXSIZE; i++)
 	{
@@ -24,7 +30,7 @@ int main()
 
 	while (((c = getchar()) != EOF) && (is_error == 0))
 	{
-		if ((c == '{') || (c == '['))						//|| (c == '[') || (c == '('))
+		if ((c == '{') || (c == '[') || (c == '(') || (c == '<'))
 		{
 			bracket[pos] = c;
 			pos++;
@@ -32,28 +38,22 @@ int main()
 
 		else if (c == '}')
 		{
-			if ((pos > 0) && (bracket[pos - 1] == '{'))
-			{
-				bracket[pos - 1] = 0;
-				pos--;
-			}
-			else
-			{
-				is_error = 1;
-			}
+			bracket_handler('{');
 		}
 
 		else if (c == ']')
 		{
-			if ((pos > 0) && (bracket[pos - 1] == '['))
-			{
-				bracket[pos - 1] = 0;
-				pos--;
-			}
-			else
-			{
-				is_error = 1;
-			}
+			bracket_handler('[');
+		}
+
+		else if (c == ')')
+		{
+			bracket_handler('(');
+		}
+
+		else if (c == '>')
+		{
+			bracket_handler('<');
 		}
 	}
 
@@ -66,4 +66,19 @@ int main()
 		printf("Program has syntax errors with unbalanced brackets");
 	}
 	return EXIT_SUCCESS;
+}
+
+
+void bracket_handler(char bracket_type)
+{
+	if ((pos > 0) && (bracket[pos - 1] == bracket_type))
+	{
+		bracket[pos - 1] = 0;
+		pos--;
+	}
+	else
+	{
+		is_error = 1;
+	}
+	return;
 }
