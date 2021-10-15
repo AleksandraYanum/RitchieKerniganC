@@ -17,6 +17,7 @@ void slash_handler();
 void enter_handler();
 void asterisk_handler();
 int out_of_comment();
+void print_status();
 
 
 // ###########################################################################
@@ -33,6 +34,8 @@ int slash_count = 0; // count of slashes that are standing in a ROW
 char prev_symb = 0; //previous symbol
 char prev_quote = 0; //type of previous quote (it can be " or ')
 char c; // input
+int line_count = 1;
+char error_bracket; //unbalanced closing bracket 
 
 
 int main()
@@ -83,14 +86,8 @@ int main()
 		prev_symb = c;
 	}
 
-	if ((is_error == 0) && (pos == 0))
-	{
-		printf("Program is correct");
-	}
-	else
-	{
-		printf("Program has syntax errors with unbalanced brackets");
-	}
+	print_status();
+
 	return EXIT_SUCCESS;
 }
 
@@ -109,6 +106,7 @@ void bracket_handler(char bracket_type)
 			else
 			{
 				is_error = 1;
+				error_bracket = c;
 			}
 		}
 	}
@@ -139,6 +137,7 @@ void enter_handler()
 		one_line_comment = OUT;
 		slash_count = 0;
 	}
+	line_count++;
 	return;
 }
 
@@ -162,4 +161,33 @@ int out_of_comment()
 		result = 1;
 	}
 	return result;
+}
+
+void print_status()
+{
+	if ((is_error == 0) && (pos == 0))
+	{
+		printf("Program is correct");
+	}
+	else
+
+	{
+		printf("Line %d: Program has syntax errors with unbalanced brackets.\n", line_count);
+
+		if ((is_error == 1) && (pos == 0))
+		{
+			printf("Bracket %c doesn't have the corresponding opening one.", error_bracket);
+		}
+
+		else if ((is_error == 0) && (pos > 0))
+		{
+			printf("Bracket %c doesn't have the corresponding closing one.", bracket[pos - 1]);
+		}
+
+		else if ((is_error == 1) && (pos > 0))
+		{
+			printf("Unbalanced brackets are: %c and %c.", bracket[pos - 1], error_bracket);
+		}
+	}
+	return;
 }
