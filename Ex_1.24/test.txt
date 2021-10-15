@@ -76,6 +76,7 @@ int out_of_comment()
 	return result;
 }
 
+/*
 void slash_handler()
 {
 	if (str == OUT)
@@ -83,7 +84,7 @@ void slash_handler()
 		if (out_of_comment())
 		{
 			slash_count++;
-			if (slash_count == SINGLE_COMMENT_SLASH_COUNT)
+			if (slash_count == SINGLE_COMMENT_SLASH_COUNT]
 			{
 				one_line_comment = IN;
 			}
@@ -99,6 +100,7 @@ void slash_handler()
 	}
 	return;
 }
+*/
 
 void enter_handler()
 {

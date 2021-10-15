@@ -19,6 +19,8 @@ void asterisk_handler();
 int out_of_comment();
 void print_status();
 void quote_handler();
+void backslash_handler();
+void default_handler();
 
 
 // ###########################################################################
@@ -37,6 +39,7 @@ char prev_quote = 0; //type of previous quote (it can be " or ')
 char c; // input
 int line_count = 1;
 char error_bracket; //unbalanced closing bracket
+int escape = 0; // 0 - not a character constant; 1 - is a character constant
 
 
 int main()
@@ -89,6 +92,16 @@ int main()
 			quote_handler();
 		}
 
+		else if (c == '\\')
+		{
+			backslash_handler();
+		}
+
+		else
+		{
+			default_handler();
+		}
+
 		prev_symb = c;
 	}
 
@@ -119,6 +132,10 @@ void bracket_handler(char bracket_type)
 			}
 		}
 	}
+	else
+	{
+		escape = 0;
+	}
 	return;
 }
 
@@ -138,6 +155,10 @@ void slash_handler()
 		{
 			multi_line_comment = OUT;
 		}
+	}
+	else
+	{
+		escape = 0;
 	}
 	return;
 }
@@ -167,6 +188,10 @@ void asterisk_handler()
 				multi_line_comment = IN;
 			}
 		}
+	}
+	else
+	{
+		escape = 0;
 	}
 	return;
 }
@@ -214,14 +239,14 @@ void quote_handler()
 {
 	if (out_of_comment())
 	{
-		if (prev_symb != '\\')
+		if (str == OUT)
 		{
-			if (str == OUT)
-			{
-				str = IN;
-				prev_quote = c;
-			}
-			else
+			str = IN;
+			prev_quote = c;
+		}
+		else
+		{
+			if (escape == 0)
 			{
 				if (c == prev_quote)
 				{
@@ -229,9 +254,35 @@ void quote_handler()
 					prev_quote = 0;
 				}
 			}
+			else
+			{
+				escape = 0;
+			}
 		}
-		
 	}
 
 	return;
 }
+
+void backslash_handler()
+{
+	if (str == IN)
+	{
+		if (escape == 0)
+		{
+			escape = 1;
+		}
+		else
+		{
+			escape = 0;
+		}
+	}
+	return;
+}
+
+void default_handler()
+{
+	escape = 0;
+	return;
+}
+
