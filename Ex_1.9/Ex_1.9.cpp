@@ -4,7 +4,7 @@ int main()
 /* don't print more than 1 space together*/
 
 {
-	int c, space;
+	int c, space = 0;
 	while ((c = getchar()) != EOF)
 	{
 		if (c != ' ')
