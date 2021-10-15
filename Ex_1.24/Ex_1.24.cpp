@@ -33,6 +33,7 @@ int slash_count = 0; // count of slashes that are standing in a ROW
 char prev_symb = 0; //previous symbol
 char prev_quote = 0; //type of previous quote (it can be " or ')
 char c; // input
+int line_count = 1;
 
 
 int main()
@@ -89,7 +90,7 @@ int main()
 	}
 	else
 	{
-		printf("Program has syntax errors with unbalanced brackets");
+		printf("Program has syntax errors with unbalanced brackets in line %d", line_count);
 	}
 	return EXIT_SUCCESS;
 }
@@ -139,6 +140,7 @@ void enter_handler()
 		one_line_comment = OUT;
 		slash_count = 0;
 	}
+	line_count++;
 	return;
 }
 
