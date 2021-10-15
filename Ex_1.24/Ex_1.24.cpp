@@ -18,6 +18,7 @@ void enter_handler();
 void asterisk_handler();
 int out_of_comment();
 void print_status();
+void quote_handler();
 
 
 // ###########################################################################
@@ -35,7 +36,7 @@ char prev_symb = 0; //previous symbol
 char prev_quote = 0; //type of previous quote (it can be " or ')
 char c; // input
 int line_count = 1;
-char error_bracket; //unbalanced closing bracket 
+char error_bracket; //unbalanced closing bracket
 
 
 int main()
@@ -47,7 +48,7 @@ int main()
 
 	while (((c = getchar()) != EOF) && (is_error == 0))
 	{
-		if (((c == '{') || (c == '[') || (c == '(')) && (out_of_comment()))
+		if (((c == '{') || (c == '[') || (c == '(')) && (out_of_comment()) && (str == OUT))
 		{
 			bracket[pos] = c;
 			pos++;
@@ -83,6 +84,11 @@ int main()
 			asterisk_handler();
 		}
 
+		else if ((c == '"') || (c == '\''))
+		{
+			quote_handler();
+		}
+
 		prev_symb = c;
 	}
 
@@ -94,19 +100,22 @@ int main()
 
 void bracket_handler(char bracket_type)
 {
-	if (out_of_comment())
+	if (str == OUT)
 	{
-		if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
+		if (out_of_comment())
 		{
-			if ((pos > 0) && (bracket[pos - 1] == bracket_type))
+			if (slash_count < SINGLE_COMMENT_SLASH_COUNT)
 			{
-				bracket[pos - 1] = 0;
-				pos--;
-			}
-			else
-			{
-				is_error = 1;
-				error_bracket = c;
+				if ((pos > 0) && (bracket[pos - 1] == bracket_type))
+				{
+					bracket[pos - 1] = 0;
+					pos--;
+				}
+				else
+				{
+					is_error = 1;
+					error_bracket = c;
+				}
 			}
 		}
 	}
@@ -115,39 +124,48 @@ void bracket_handler(char bracket_type)
 
 void slash_handler()
 {
-	if (out_of_comment())
+	if (str == OUT)
 	{
-		slash_count++;
-		if (slash_count == SINGLE_COMMENT_SLASH_COUNT)		//amount of slashes that create comment
+		if (out_of_comment())
 		{
-			one_line_comment = IN;
+			slash_count++;
+			if (slash_count == SINGLE_COMMENT_SLASH_COUNT)		//amount of slashes that create comment
+			{
+				one_line_comment = IN;
+			}
 		}
-	}
-	else if ((multi_line_comment == IN) && (prev_symb == '*'))
-	{
-		multi_line_comment = OUT;
+		else if ((multi_line_comment == IN) && (prev_symb == '*'))
+		{
+			multi_line_comment = OUT;
+		}
 	}
 	return;
 }
 
 void enter_handler()
 {
-	if (one_line_comment == IN)
+	if (str == OUT)
 	{
-		one_line_comment = OUT;
-		slash_count = 0;
+		if (one_line_comment == IN)
+		{
+			one_line_comment = OUT;
+			slash_count = 0;
+		}
+		line_count++;
 	}
-	line_count++;
 	return;
 }
 
 void asterisk_handler()
 {
-	if (out_of_comment())
+	if (str == OUT)
 	{
-		if (prev_symb == '/')
+		if (out_of_comment())
 		{
-			multi_line_comment = IN;
+			if (prev_symb == '/')
+			{
+				multi_line_comment = IN;
+			}
 		}
 	}
 	return;
@@ -167,7 +185,7 @@ void print_status()
 {
 	if ((is_error == 0) && (pos == 0))
 	{
-		printf("Program is correct");
+		printf("Program is correct.");
 	}
 	else
 
@@ -189,5 +207,31 @@ void print_status()
 			printf("Unbalanced brackets are: %c and %c.", bracket[pos - 1], error_bracket);
 		}
 	}
+	return;
+}
+
+void quote_handler()
+{
+	if (out_of_comment())
+	{
+		if (prev_symb != '\\')
+		{
+			if (str == OUT)
+			{
+				str = IN;
+				prev_quote = c;
+			}
+			else
+			{
+				if (c == prev_quote)
+				{
+					str = OUT;
+					prev_quote = 0;
+				}
+			}
+		}
+		
+	}
+
 	return;
 }
