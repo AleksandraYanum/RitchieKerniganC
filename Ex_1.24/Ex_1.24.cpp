@@ -53,8 +53,15 @@ int main()
 	{
 		if (((c == '{') || (c == '[') || (c == '(')) && (out_of_comment()) && (str == OUT))
 		{
-			bracket[pos] = c;
-			pos++;
+			if (pos < MAXSIZE)
+			{
+				bracket[pos] = c;
+				pos++;
+			}
+			else
+			{
+				is_error = 2;
+			}
 		}
 
 		else if (c == '}')
@@ -215,21 +222,29 @@ void print_status()
 	else
 
 	{
-		printf("Line %d: Program has syntax errors with unbalanced brackets.\n", line_count);
-
-		if ((is_error == 1) && (pos == 0))
+		if (is_error != 2)
 		{
-			printf("Bracket %c doesn't have the corresponding opening one.", error_bracket);
+			printf("Line %d: Program has syntax errors with unbalanced brackets.\n", line_count);
+
+			if ((is_error == 1) && (pos == 0))
+			{
+				printf("Bracket %c doesn't have the corresponding opening one.", error_bracket);
+			}
+
+			else if ((is_error == 0) && (pos > 0))
+			{
+				printf("Bracket %c doesn't have the corresponding closing one.", bracket[pos - 1]);
+			}
+
+			else if ((is_error == 1) && (pos > 0))
+			{
+				printf("Unbalanced brackets are: %c and %c.", bracket[pos - 1], error_bracket);
+			}
 		}
 
-		else if ((is_error == 0) && (pos > 0))
+		else 
 		{
-			printf("Bracket %c doesn't have the corresponding closing one.", bracket[pos - 1]);
-		}
-
-		else if ((is_error == 1) && (pos > 0))
-		{
-			printf("Unbalanced brackets are: %c and %c.", bracket[pos - 1], error_bracket);
+			printf("Memory error: too many nested brackets. Program limit is %d.", MAXSIZE);
 		}
 	}
 	return;
