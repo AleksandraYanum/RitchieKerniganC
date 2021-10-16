@@ -174,7 +174,7 @@ void default_handler()
 void quote_handler()
 {
 	if (out_of_comment())
-	{
+	{(
 		if (prev_symb != '\\')
 		{
 			if (str == OUT)

@@ -7,6 +7,10 @@
 # define IN 1 // in the comment
 # define OUT 0 // out of the comment
 # define SINGLE_COMMENT_SLASH_COUNT 2 // amount of slashes that create comment
+# define NO_ERROR 0
+# define BRACKET_ERROR 1
+# define MEMORY_ERROR 2
+
 
 // ###########################################################################
 // functions
@@ -29,7 +33,7 @@ void default_handler();
 
 int pos = 0; //position of array elements
 char bracket[MAXSIZE];
-int is_error = 0; // 1 - error, 0 - not error
+int error = NO_ERROR; 
 int one_line_comment = OUT; // IN or OUT (of) the one-line comment (begins with '//')
 int multi_line_comment = OUT; // IN or OUT (of) the multi-line comment (begins with '/*' and ends with '*/')
 int str = OUT; // IN or OUT (of) the printed string
@@ -49,12 +53,19 @@ int main()
 		bracket[i] = 0;
 	}
 
-	while (((c = getchar()) != EOF) && (is_error == 0))
+	while (((c = getchar()) != EOF) && (error == NO_ERROR))
 	{
 		if (((c == '{') || (c == '[') || (c == '(')) && (out_of_comment()) && (str == OUT))
 		{
-			bracket[pos] = c;
-			pos++;
+			if (pos < MAXSIZE)
+			{
+				bracket[pos] = c;
+				pos++;
+			}
+			else
+			{
+				error = MEMORY_ERROR;
+			}
 		}
 
 		else if (c == '}')
@@ -126,7 +137,7 @@ void bracket_handler(char bracket_type)
 				}
 				else
 				{
-					is_error = 1;
+					error = BRACKET_ERROR;
 					error_bracket = c;
 				}
 			}
@@ -208,28 +219,36 @@ int out_of_comment()
 
 void print_status()
 {
-	if ((is_error == 0) && (pos == 0))
+	if ((error == NO_ERROR) && (pos == 0))
 	{
 		printf("Program is correct.");
 	}
 	else
 
 	{
-		printf("Line %d: Program has syntax errors with unbalanced brackets.\n", line_count);
-
-		if ((is_error == 1) && (pos == 0))
+		if (error != MEMORY_ERROR)
 		{
-			printf("Bracket %c doesn't have the corresponding opening one.", error_bracket);
+			printf("Line %d: Program has syntax errors with unbalanced brackets.\n", line_count);
+
+			if ((error == BRACKET_ERROR) && (pos == 0))
+			{
+				printf("Bracket %c doesn't have the corresponding opening one.", error_bracket);
+			}
+
+			else if ((error == NO_ERROR) && (pos > 0))
+			{
+				printf("Bracket %c doesn't have the corresponding closing one.", bracket[pos - 1]);
+			}
+
+			else if ((error == BRACKET_ERROR) && (pos > 0))
+			{
+				printf("Unbalanced brackets are: %c and %c.", bracket[pos - 1], error_bracket);
+			}
 		}
 
-		else if ((is_error == 0) && (pos > 0))
+		else 
 		{
-			printf("Bracket %c doesn't have the corresponding closing one.", bracket[pos - 1]);
-		}
-
-		else if ((is_error == 1) && (pos > 0))
-		{
-			printf("Unbalanced brackets are: %c and %c.", bracket[pos - 1], error_bracket);
+			printf("Memory error: too many nested brackets. Program limit is %d.", MAXSIZE);
 		}
 	}
 	return;
