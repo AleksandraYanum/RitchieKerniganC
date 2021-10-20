@@ -46,6 +46,11 @@ int main()
 
 	}
 	
+	for (int i = 0; i < pos; i++)
+	{
+		putchar(symb_arr[i]);
+		symb_arr[i] = 0;
+	}
 
 
 
