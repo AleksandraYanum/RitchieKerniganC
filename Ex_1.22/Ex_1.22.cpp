@@ -10,6 +10,8 @@
 // ###########################################################################
 
 int pos = 0; // position of current symbol; shows, how many symbols were inputed
+int pos_arr = 0; //position of current symbol in array
+int space_pos = 0; // position of the last space
 char symb_arr[MAXSIZE];
 
 // ###########################################################################
@@ -20,7 +22,6 @@ void print_array();
 
 int main()
 {
-	int space_pos = 0; // position of the last space
 	char c;
 
 	for (int i = 0; i < MAXSIZE; i++)
@@ -34,19 +35,21 @@ int main()
 		{
 			if (c == ' ')
 			{
-				space_pos = pos;
+				space_pos = pos_arr;
 			}
-			symb_arr[pos] = c;
+			symb_arr[pos_arr] = c;
 			pos++;
+			pos_arr++;
 		}
 
 		else if (pos == MAXSIZE)
 		{
 			symb_arr[space_pos] = '\n';
 			print_array();
-			pos = 1;
 			symb_arr[0] = c;
+			pos = pos - space_pos;
 			space_pos = 0;
+			pos_arr = 1;
 		}
 	}
 
@@ -57,7 +60,8 @@ int main()
 
 void print_array()
 {
-	for (int i = 0; i < pos; i++)
+	//symb_arr[space_pos] = '\n';
+	for (int i = 0; i < pos_arr; i++)
 	{
 		putchar(symb_arr[i]);
 		symb_arr[i] = 0;
