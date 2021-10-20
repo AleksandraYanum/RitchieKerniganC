@@ -17,7 +17,7 @@ int main()
 		symb_arr[i] = 0;
 	}
 
-	while ((c = getchar()) != EOF) 
+	while ((c = getchar()) != EOF)
 	{
 		if (pos < MAXSIZE)
 		{
@@ -29,23 +29,23 @@ int main()
 			pos++;
 		}
 
-		else
+		else if (pos == MAXSIZE)
 		{
 			symb_arr[space_pos] = '\n';
 
 			for (int i = 0; i < pos; i++)
 			{
 				putchar(symb_arr[i]);
+				symb_arr[i] = 0;
 			}
 
-			pos = pos - space_pos;
-
+			pos = 1;
+			symb_arr[0] = c;
+			space_pos = 0;
 		}
 
-
-
-
 	}
+	
 
 
 
