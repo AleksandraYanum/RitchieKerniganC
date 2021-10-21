@@ -13,9 +13,9 @@ NB! Program accept words for input no longer than MAXSIZE letters
 // global variables
 // ###########################################################################
 
-int pos = 0; // position of current symbol in current output; shows, how many symbols were inputed
+int output_pos = 0; // position of current symbol in current output; shows, how many symbols were inputed
 int pos_arr = 0; //position of current symbol in array
-int space_pos = -1; // position of the last space
+int space_pos = -1; // position of the last space in the array
 char symb_arr[MAXSIZE + 1];
 
 // ###########################################################################
@@ -23,38 +23,37 @@ char symb_arr[MAXSIZE + 1];
 // ###########################################################################
 
 void print_array();
+void init_array();
+void replace_space_with_enter_in_array();
+
+// ###########################################################################
 
 int main()
 {
 	char c;
 
-	for (int i = 0; i < MAXSIZE + 1; i++)
-	{
-		symb_arr[i] = 0;
-	}
+	init_array();
 
 	while ((c = getchar()) != EOF)
 	{
-		if (pos < MAXSIZE + 1)
+		if (output_pos < MAXSIZE + 1)
 		{
 			if (c == ' ')
 			{
 				space_pos = pos_arr;
 			}
 			symb_arr[pos_arr] = c;
-			pos++;
+			output_pos++;
 			pos_arr++;
 		}
 
-		else if (pos == MAXSIZE + 1)
+		else if (output_pos == MAXSIZE + 1)
 		{
-			if (space_pos >= 0)
-			{
-				symb_arr[space_pos] = '\n';
-			}
+			replace_space_with_enter_in_array();
 			print_array();
 			symb_arr[0] = c;
-			pos = pos - space_pos;
+			pos_arr = 1;
+			output_pos = output_pos - space_pos;
 			if (c == ' ')
 			{
 				space_pos = 0;
@@ -63,15 +62,10 @@ int main()
 			{
 				space_pos = -1;
 			}
-			
-			pos_arr = 1;
 		}
 	}
 
-	if (space_pos >= 0)
-	{
-		symb_arr[space_pos] = '\n';
-	}
+	replace_space_with_enter_in_array();
 	print_array();
 	return EXIT_SUCCESS;
 }
@@ -84,6 +78,24 @@ void print_array()
 	{
 		putchar(symb_arr[i]);
 		symb_arr[i] = 0;
+	}
+	return;
+}
+
+void init_array()
+{
+	for (int i = 0; i < MAXSIZE + 1; i++)
+	{
+		symb_arr[i] = 0;
+	}
+	return;
+}
+
+void replace_space_with_enter_in_array()
+{
+	if (space_pos >= 0)
+	{
+		symb_arr[space_pos] = '\n';
 	}
 	return;
 }
