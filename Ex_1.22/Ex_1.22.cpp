@@ -13,9 +13,9 @@ NB! Program accept words for input no longer than MAXSIZE letters
 // global variables
 // ###########################################################################
 
-int pos = 0; // position of current symbol; shows, how many symbols were inputed
+int pos = 0; // position of current symbol in current output; shows, how many symbols were inputed
 int pos_arr = 0; //position of current symbol in array
-int space_pos = 0; // position of the last space
+int space_pos = -1; // position of the last space
 char symb_arr[MAXSIZE + 1];
 
 // ###########################################################################
@@ -48,15 +48,30 @@ int main()
 
 		else if (pos == MAXSIZE + 1)
 		{
-			symb_arr[space_pos] = '\n';
+			if (space_pos >= 0)
+			{
+				symb_arr[space_pos] = '\n';
+			}
 			print_array();
 			symb_arr[0] = c;
 			pos = pos - space_pos;
-			space_pos = 0;
+			if (c == ' ')
+			{
+				space_pos = 0;
+			}
+			else
+			{
+				space_pos = -1;
+			}
+			
 			pos_arr = 1;
 		}
 	}
 
+	if (space_pos >= 0)
+	{
+		symb_arr[space_pos] = '\n';
+	}
 	print_array();
 	return EXIT_SUCCESS;
 }
@@ -64,7 +79,7 @@ int main()
 
 void print_array()
 {
-	//symb_arr[space_pos] = '\n';
+
 	for (int i = 0; i < pos_arr; i++)
 	{
 		putchar(symb_arr[i]);
