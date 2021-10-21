@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* program "folds" long input lines into shorter lines */
+/* 
+program "folds" long input lines into shorter lines 
+Version_1: Program replaces the necessary space with enter
+NB! Program accept words for input no longer than MAXSIZE letters
+*/
 
 # define MAXSIZE 6 //max size of the symbol array; it's also the length of line
 
@@ -12,7 +16,7 @@
 int pos = 0; // position of current symbol; shows, how many symbols were inputed
 int pos_arr = 0; //position of current symbol in array
 int space_pos = 0; // position of the last space
-char symb_arr[MAXSIZE];
+char symb_arr[MAXSIZE + 1];
 
 // ###########################################################################
 // functions
@@ -24,14 +28,14 @@ int main()
 {
 	char c;
 
-	for (int i = 0; i < MAXSIZE; i++)
+	for (int i = 0; i < MAXSIZE + 1; i++)
 	{
 		symb_arr[i] = 0;
 	}
 
 	while ((c = getchar()) != EOF)
 	{
-		if (pos < MAXSIZE)
+		if (pos < MAXSIZE + 1)
 		{
 			if (c == ' ')
 			{
@@ -42,7 +46,7 @@ int main()
 			pos_arr++;
 		}
 
-		else if (pos == MAXSIZE)
+		else if (pos == MAXSIZE + 1)
 		{
 			symb_arr[space_pos] = '\n';
 			print_array();
