@@ -16,6 +16,7 @@ NB! Program accept words for input no longer than MAXSIZE letters
 // global variables
 // ###########################################################################
 
+char c;
 char symb_arr[MAXSIZE + 1];
 int pos = 0; // position of current symbol in current output; shows, how many symbols were inputed
 int space_pos = -1; // position of the last space in the array
@@ -31,13 +32,14 @@ void print_array(int print_to);
 void find_limit_to_print();
 void init_array(int index_from, int index_to);
 void array_left_shift();
+int is_delimiter();
 
 
 // ###########################################################################
 
 int main()
 {
-	char c;
+
 
 	init_array(0, MAXSIZE + 1);
 
@@ -45,7 +47,7 @@ int main()
 	{
 		if (pos < MAXSIZE + 1)
 		{
-			if (c == ' ')
+			if (is_delimiter())
 			{
 				space_pos = pos;
 			}
@@ -65,7 +67,7 @@ int main()
 			init_array(pos, last_symb);
 			
 			symb_arr[pos] = c;
-			if (c == ' ')
+			if (is_delimiter())
 			{
 				space_pos = pos;
 			}
@@ -82,6 +84,15 @@ int main()
 	return EXIT_SUCCESS;
 }
 
+int is_delimiter()
+{
+	int result = 0;
+	if ((c == ' ') || (c == ','))
+	{
+		result = 1;
+	}
+	return result;
+}
 
 void find_limit_to_print()
 {
