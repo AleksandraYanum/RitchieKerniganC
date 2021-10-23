@@ -3,14 +3,11 @@
 
 /* 
 program "folds" long input lines into shorter lines 
-Version_1: Program replaces the necessary space with enter
+Version_1: Program find the right position to shift words (after delimiter character)
 NB! Program accept words for input no longer than MAXSIZE letters
 */
 
 # define MAXSIZE 6 //max size of the symbol array; it's also the length of line
-# define YES 1
-# define NO 0
-
 
 // ###########################################################################
 // global variables
@@ -18,11 +15,9 @@ NB! Program accept words for input no longer than MAXSIZE letters
 
 char c;
 char symb_arr[MAXSIZE + 1];
-int pos = 0; // position of current symbol in current output; shows, how many symbols were inputed
+int pos = 0; // position of the next symbol in input
 int space_pos = -1; // position of the last space in the array
-int array_is_empty = YES;
 int print_to = -1; //the element to print array to
-
 
 // ###########################################################################
 // functions
@@ -34,13 +29,10 @@ void init_array(int index_from, int index_to);
 void array_left_shift();
 int is_delimiter(char c);
 
-
 // ###########################################################################
 
 int main()
 {
-
-
 	init_array(0, MAXSIZE + 1);
 
 	while ((c = getchar()) != EOF)
@@ -53,7 +45,6 @@ int main()
 			}
 			symb_arr[pos] = c;
 			pos++;
-			array_is_empty = NO;
 		}
 
 		else if (pos == MAXSIZE + 1)
