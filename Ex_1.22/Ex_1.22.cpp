@@ -59,16 +59,11 @@ int main()
 			find_limit_to_print();
 			print_array(print_to);
 			putchar('\n');
-
 			array_left_shift();
 			int last_symb = pos;
 			pos = pos - (space_pos + 1);
 			init_array(pos, last_symb);
 			
-			
-			{
-				pos = 0;
-			}
 			symb_arr[pos] = c;
 			if (c == ' ')
 			{
@@ -84,7 +79,7 @@ int main()
 
 	print_array(pos);
 	
-		return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
 
 
