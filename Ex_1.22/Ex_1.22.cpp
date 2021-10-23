@@ -20,13 +20,15 @@ char symb_arr[MAXSIZE + 1];
 int pos = 0; // position of current symbol in current output; shows, how many symbols were inputed
 int space_pos = -1; // position of the last space in the array
 int array_is_empty = YES;
+int print_to = -1; //the element to print array to
 
 
 // ###########################################################################
 // functions
 // ###########################################################################
 
-void print_array();
+void print_array(int print_to);
+void find_limit_to_print();
 void init_array(int index_from, int index_to);
 void array_left_shift();
 
@@ -54,16 +56,16 @@ int main()
 
 		else if (pos == MAXSIZE + 1)
 		{
-			print_array();
+			find_limit_to_print();
+			print_array(print_to);
 			putchar('\n');
-			if (array_is_empty == NO)
-			{
-				array_left_shift();
-				int last_symb = pos;
-				pos = pos - (space_pos + 1);
-				init_array(pos, last_symb);
-			}
-			else
+
+			array_left_shift();
+			int last_symb = pos;
+			pos = pos - (space_pos + 1);
+			init_array(pos, last_symb);
+			
+			
 			{
 				pos = 0;
 			}
@@ -80,43 +82,31 @@ int main()
 		}
 	}
 
-	print_array();
+	print_array(pos);
 	
-	if (array_is_empty == NO)
-	{
-		putchar('\n');
-		array_left_shift();
-		int last_symb = pos;
-		pos = pos - (space_pos + 1);
-		space_pos = -1;
-		init_array(pos, last_symb);
-		print_array();
-	}
-	
-	return EXIT_SUCCESS;
+		return EXIT_SUCCESS;
 }
 
 
-void print_array()
+void find_limit_to_print()
 {
 	if (space_pos > -1)
 	{
-		for (int i = 0; i <= space_pos; i++)
-		{
-			putchar(symb_arr[i]);
-		}
+		print_to = space_pos + 1;
 	}
-	else if (space_pos == -1)
+	else
 	{
-		for (int i = 0; i < pos; i++)
-		{
-			putchar(symb_arr[i]);
-			symb_arr[i] = '\0';
-			
-		}
-		array_is_empty = YES;
+		print_to = pos;
 	}
-	
+	return;
+}
+
+void print_array(int print_to)
+{
+	for (int i = 0; i < print_to; i++)
+	{
+		putchar(symb_arr[i]);
+	}
 	return;
 }
 
