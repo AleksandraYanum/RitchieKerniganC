@@ -32,7 +32,7 @@ void print_array(int print_to);
 void find_limit_to_print();
 void init_array(int index_from, int index_to);
 void array_left_shift();
-int is_delimiter();
+int is_delimiter(char c);
 
 
 // ###########################################################################
@@ -47,7 +47,7 @@ int main()
 	{
 		if (pos < MAXSIZE + 1)
 		{
-			if (is_delimiter())
+			if (is_delimiter(c))
 			{
 				space_pos = pos;
 			}
@@ -67,7 +67,7 @@ int main()
 			init_array(pos, last_symb);
 			
 			symb_arr[pos] = c;
-			if (is_delimiter())
+			if (is_delimiter(c))
 			{
 				space_pos = pos;
 			}
@@ -84,7 +84,7 @@ int main()
 	return EXIT_SUCCESS;
 }
 
-int is_delimiter()
+int is_delimiter(char c)
 {
 	int result = 0;
 	if ((c == ' ') || (c == ','))
