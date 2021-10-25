@@ -7,7 +7,7 @@ Version_1: Program find the right position to shift words (after delimiter chara
 NB! Program accept words for input no longer than MAXSIZE letters
 */
 
-# define MAXSIZE 6 //max size of the symbol array; it's also the length of line
+# define MAXSIZE 10 //max size of the symbol array; it's also the length of line
 
 // ###########################################################################
 // global variables
@@ -24,7 +24,7 @@ char delimiter_arr[] = " /\\()\"\'-.,:;<>~!@#$%^&*|+=[]{}~\?│";
 // functions
 // ###########################################################################
 
-void print_array(int print_to);
+void print_array(int print_to, int is_new_line); //is_new_line: 1 - to print enter, 0 - not to print
 void find_limit_to_print();
 void init_array(int index_from, int index_to);
 void array_left_shift();
@@ -49,7 +49,7 @@ int main()
 			}
 			if (c == '\n')
 			{
-				print_array(pos);
+				print_array(pos, 0);
 				pos = 0;
 				space_pos = -1;
 			}
@@ -58,13 +58,12 @@ int main()
 		else if (pos == MAXSIZE)
 		{
 			find_limit_to_print();
-			print_array(print_to);
-			putchar('\n');
+			print_array(print_to, 1);
 			array_left_shift();
 			int last_symb = pos;
 			if (space_pos > -1)
 			{
-				pos = pos - (space_pos + 1);
+				pos = pos - space_pos; //!!!!!!!!!!!!!!!!!!!
 			}
 			else
 			{
@@ -88,7 +87,7 @@ int main()
 		}
 	}
 
-	print_array(pos);
+	print_array(pos, 0);
 	
 	return EXIT_SUCCESS;
 }
@@ -110,7 +109,7 @@ void find_limit_to_print()
 {
 	if (space_pos > -1)
 	{
-		print_to = space_pos + 1;
+		print_to = space_pos;
 	}
 	else
 	{
@@ -119,11 +118,15 @@ void find_limit_to_print()
 	return;
 }
 
-void print_array(int print_to)
+void print_array(int print_to, int is_new_line)
 {
 	for (int i = 0; i < print_to; i++)
 	{
 		putchar(symb_arr[i]);
+	}
+	if (is_new_line == 1)
+	{
+		putchar('\n');
 	}
 	return;
 }
@@ -139,9 +142,9 @@ void init_array(int index_from, int index_to)
 
 void array_left_shift()
 {
-	for (int i = space_pos + 1; i < pos; i++)
+	for (int i = space_pos; i < pos; i++)
 	{
-		symb_arr[i - (space_pos + 1)] = symb_arr[i];
+		symb_arr[i - space_pos] = symb_arr[i];
 
 	}
 	return;
