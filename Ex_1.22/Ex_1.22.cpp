@@ -18,6 +18,7 @@ char symb_arr[MAXSIZE + 1];
 int pos = 0; // position of the next symbol in input
 int space_pos = -1; // position of the last space in the array
 int print_to = -1; //the element to print array to
+char delimiter_arr[] = " ,.";
 
 // ###########################################################################
 // functions
@@ -78,9 +79,12 @@ int main()
 int is_delimiter(char c)
 {
 	int result = 0;
-	if ((c == ' ') || (c == ','))
+	for (int i = 0; (delimiter_arr[i] != '\0') && (result == 0); i++)
 	{
-		result = 1;
+		if (c == delimiter_arr[i])
+		{
+			result = 1;
+		}
 	}
 	return result;
 }
