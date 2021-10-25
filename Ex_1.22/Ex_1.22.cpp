@@ -38,27 +38,44 @@ int main()
 
 	while ((c = getchar()) != EOF)
 	{
-		if (pos < MAXSIZE + 1)
+		if (pos < MAXSIZE)
 		{
+			
+			symb_arr[pos] = c;
+			pos++;
 			if (is_delimiter(c))
 			{
 				space_pos = pos;
 			}
-			symb_arr[pos] = c;
-			pos++;
+			if (c == '\n')
+			{
+				print_array(pos);
+				pos = 0;
+				space_pos = -1;
+			}
 		}
 
-		else if (pos == MAXSIZE + 1)
+		else if (pos == MAXSIZE)
 		{
 			find_limit_to_print();
 			print_array(print_to);
 			putchar('\n');
 			array_left_shift();
 			int last_symb = pos;
-			pos = pos - (space_pos + 1);
+			if (space_pos > -1)
+			{
+				pos = pos - (space_pos + 1);
+			}
+			else
+			{
+				pos = 0;
+			}
 			init_array(pos, last_symb);
-			
-			symb_arr[pos] = c;
+			if (c != '\n')
+			{
+				symb_arr[pos] = c;
+			}
+			pos++;
 			if (is_delimiter(c))
 			{
 				space_pos = pos;
@@ -67,7 +84,7 @@ int main()
 			{
 				space_pos = -1;
 			}
-			pos++;
+			
 		}
 	}
 
