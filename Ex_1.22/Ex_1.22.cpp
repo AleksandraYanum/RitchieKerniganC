@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 
 /* 
@@ -18,7 +18,7 @@ char symb_arr[MAXSIZE + 1];
 int pos = 0; // position of the next symbol in input
 int space_pos = -1; // position of the last space in the array
 int print_to = -1; //the element to print array to
-char delimiter_arr[] = " ,.";
+char delimiter_arr[] = " /\\()\"\'-.,:;<>~!@#$%^&*|+=[]{}~\?│";
 
 // ###########################################################################
 // functions
