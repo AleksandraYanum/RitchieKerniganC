@@ -3,7 +3,7 @@
 
 /* 
 program "folds" long input lines into shorter lines 
-Version_2: Program shifts words partially
+Version_2: Program wraps words partially
 NB! Program accept words for input no longer than MAXSIZE letters
 */
 
@@ -30,6 +30,15 @@ void init_array(int index_from, int index_to);
 void array_left_shift();
 int is_delimiter(char c);
 
+/* function takes the word from the global array XXX and limit_position to wrap the word
+Returns the top right possible position of word wrap, otherwise -1
+Rules:
+1. Do not leave just one letter on the line (have at least 2 letters on the line)
+2. Each part should contain vowel letter (a, e, u, etc)
+3. Wrapping ends with vowel letter (e.g. hello -> he--llo)
+*/
+int find_word_wrap_position(int limit_position);
+	
 // ###########################################################################
 
 int main()
@@ -126,4 +135,9 @@ void array_left_shift()
 
 	}
 	return;
+}
+
+int find_word_wrap_position(int limit_position)
+{
+	return -1;
 }
