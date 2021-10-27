@@ -30,7 +30,8 @@ void init_array(int index_from, int index_to);
 void array_left_shift();
 int is_delimiter(char c);
 
-/* function takes the word from the global array XXX and limit_position to wrap the word
+/* 
+function takes the word from the global array XXX and limit_position to wrap the word
 Returns the top right possible position of word wrap, otherwise -1
 Rules:
 1. Do not leave just one letter on the line (have at least 2 letters on the line)
