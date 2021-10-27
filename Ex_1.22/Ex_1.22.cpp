@@ -3,7 +3,7 @@
 
 /* 
 program "folds" long input lines into shorter lines 
-Version_1: Program find the right position to shift words (after delimiter character)
+Version_2: Program shifts words partially
 NB! Program accept words for input no longer than MAXSIZE letters
 */
 
