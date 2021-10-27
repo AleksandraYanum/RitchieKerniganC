@@ -7,7 +7,7 @@ Version_1: Program find the right position to shift words (after delimiter chara
 NB! Program accept words for input no longer than MAXSIZE letters
 */
 
-# define MAXSIZE 10 //max size of the symbol array; it's also the length of line
+# define MAXSIZE 50 //max size of the symbol array; it's also the length of line
 
 // ###########################################################################
 // global variables
@@ -16,7 +16,7 @@ NB! Program accept words for input no longer than MAXSIZE letters
 char c;
 char symb_arr[MAXSIZE + 1];
 int pos = 0; // position of the next symbol in input
-int space_pos = -1; // position of the last space in the array
+int delimiter_pos = -1; // position after the last delimiter
 int print_to = -1; //the element to print array to
 char delimiter_arr[] = " /\\()\"\'-.,:;<>~!@#$%^&*|+=[]{}~\?│";
 
@@ -45,13 +45,13 @@ int main()
 			pos++;
 			if (is_delimiter(c))
 			{
-				space_pos = pos;
+				delimiter_pos = pos;
 			}
 			if (c == '\n')
 			{
 				print_array(pos, 0);
 				pos = 0;
-				space_pos = -1;
+				delimiter_pos = -1;
 			}
 		}
 
@@ -61,29 +61,14 @@ int main()
 			print_array(print_to, 1);
 			array_left_shift();
 			int last_symb = pos;
-			if (space_pos > -1)
-			{
-				pos = pos - space_pos; //!!!!!!!!!!!!!!!!!!!
-			}
-			else
-			{
-				pos = 0;
-			}
+			pos = (delimiter_pos > -1) ? (pos - delimiter_pos) : 0;
 			init_array(pos, last_symb);
 			if (c != '\n')
 			{
 				symb_arr[pos] = c;
 			}
 			pos++;
-			if (is_delimiter(c))
-			{
-				space_pos = pos;
-			}
-			else
-			{
-				space_pos = -1;
-			}
-			
+			delimiter_pos = is_delimiter(c) ? pos : -1;
 		}
 	}
 
@@ -107,14 +92,7 @@ int is_delimiter(char c)
 
 void find_limit_to_print()
 {
-	if (space_pos > -1)
-	{
-		print_to = space_pos;
-	}
-	else
-	{
-		print_to = pos;
-	}
+	print_to = (delimiter_pos > -1) ? delimiter_pos : pos;
 	return;
 }
 
@@ -142,9 +120,9 @@ void init_array(int index_from, int index_to)
 
 void array_left_shift()
 {
-	for (int i = space_pos; i < pos; i++)
+	for (int i = delimiter_pos; i < pos; i++)
 	{
-		symb_arr[i - space_pos] = symb_arr[i];
+		symb_arr[i - delimiter_pos] = symb_arr[i];
 
 	}
 	return;
