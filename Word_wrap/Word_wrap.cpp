@@ -14,18 +14,30 @@ Rules:
 // functions
 // ###########################################################################
 
-int find_word_wrap_position(int limit_position);
+int find_word_wrap_position_v2(const char* str);
+int wrap_test_v2(const char* str, int expected_pos);
 
 // ###########################################################################
 
 int main()
 {
-	
+	int test1_result = wrap_test_v2("uncle", -1);
+	printf("Test1 %s \n", test1_result == 1 ? "passed" : "failed");
+	int test2_result = wrap_test_v2("hello", 2);
+	printf("Test2 %s \n", test1_result == 1 ? "passed" : "failed");
+
 	return EXIT_SUCCESS;
 }
 
 
-int find_word_wrap_position(int limit_position)
+int find_word_wrap_position_v2(const char* str)
 {
-	return -1;
+	return -99;
+}
+
+int wrap_test_v2(const char* str, int expected_pos)
+{
+	int actual_pos = find_word_wrap_position_v2(str);
+	int result = (actual_pos == expected_pos) ? 1 : 0;
+	return result;
 }
