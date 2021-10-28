@@ -10,14 +10,24 @@ Rules:
 3. Wrapping ends with vowel letter (e.g. hello -> he--llo)
 */
 
+# define MAXSIZE 10 //max size of the symbol array
+
 // ###########################################################################
 // functions
 // ###########################################################################
+
+int find_word_length();
 
 /*
 int find_word_wrap_position_v2(const char* str);
 int wrap_test_v2(const char* str, int expected_pos);
 */
+
+// ###########################################################################
+// global variables
+// ###########################################################################
+
+char word[MAXSIZE + 1] = "hello";
 
 // ###########################################################################
 
@@ -46,3 +56,14 @@ int wrap_test_v2(const char* str, int expected_pos)
 	return result;
 }
 */
+
+
+int find_word_length()
+{
+	int count = 0;
+	for (int i = 0; word[i] != '\0'; i++)
+	{
+		count++;
+	}
+	return count;
+}
