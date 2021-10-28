@@ -20,6 +20,7 @@ int find_word_length();
 int is_vowel(char symb);
 int find_vowel_position(int last_pos);
 int find_word_wrap_position();
+int wrap_test(int expected_pos);
 
 /*
 int find_word_wrap_position_v2(const char* str);
@@ -43,6 +44,9 @@ int main()
 	int test2_result = wrap_test_v2("hello", 2);
 	printf("Test2 %s \n", test1_result == 1 ? "passed" : "failed");
 	*/
+
+	int test1_result = wrap_test(-1);
+	printf("Test1 %s \n", test1_result == 1 ? "passed" : "failed");
 
 	return EXIT_SUCCESS;
 }
@@ -121,4 +125,12 @@ int find_word_wrap_position()
 
 
 	return -99;
+}
+
+
+int wrap_test(int expected_pos)
+{
+	int actual_pos = find_word_wrap_position();
+	int result = (actual_pos == expected_pos) ? 1 : 0;
+	return result;
 }
