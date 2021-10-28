@@ -19,6 +19,7 @@ Rules:
 int find_word_length();
 int is_vowel(char symb);
 int find_vowel_position(int last_pos);
+int find_word_wrap_position();
 
 /*
 int find_word_wrap_position_v2(const char* str);
@@ -102,4 +103,22 @@ int is_vowel(char symb)
 
 	}
 	return result;
+}
+
+int find_word_wrap_position()
+{
+	int word_length = -1;
+	int vowel_position = -1;
+
+	word_length = find_word_length();
+
+	if (word_length > 3)
+	{
+		vowel_position = find_vowel_position(word_length);
+		printf("%d \n", vowel_position);
+	}
+
+
+
+	return -99;
 }
