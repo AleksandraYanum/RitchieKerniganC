@@ -10,7 +10,7 @@ Rules:
 3. Wrapping ends with vowel letter (e.g. hello -> he--llo)
 */
 
-# define MAXSIZE 10 //max size of the symbol array
+# define MAXSIZE 20 //max size of the symbol array
 
 // ###########################################################################
 // functions
@@ -95,6 +95,7 @@ int find_vowel_position(int last_pos)
 	return vowel_pos;
 }
 
+
 int is_vowel(char symb)
 {
 	int result = 0;
@@ -109,28 +110,36 @@ int is_vowel(char symb)
 	return result;
 }
 
-int find_word_wrap_position()
-{
-	int word_length = -1;
-	int vowel_position = -1;
-
-	word_length = find_word_length();
-
-	if (word_length > 3)
-	{
-		vowel_position = find_vowel_position(word_length);
-		printf("%d \n", vowel_position);
-	}
-
-
-
-	return -99;
-}
-
 
 int wrap_test(int expected_pos)
 {
 	int actual_pos = find_word_wrap_position();
 	int result = (actual_pos == expected_pos) ? 1 : 0;
 	return result;
+}
+
+
+int find_word_wrap_position()
+{
+	int word_length = -1;
+	int vowel_position = -1;
+	int last_symb_pos = -1;
+
+	word_length = find_word_length();
+	last_symb_pos = word_length - 1;
+
+	if (word_length > 3)
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			vowel_position = find_vowel_position(last_symb_pos);
+			last_symb_pos = vowel_position - 1;
+		}
+
+		printf("%d \n", vowel_position);
+	}
+
+
+
+	return -99;
 }
