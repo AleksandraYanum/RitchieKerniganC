@@ -45,7 +45,7 @@ int main()
 	printf("Test2 %s \n", test1_result == 1 ? "passed" : "failed");
 	*/
 
-	int test1_result = wrap_test(-1);
+	int test1_result = wrap_test(6);
 	printf("Test1 %s \n", test1_result == 1 ? "passed" : "failed");
 
 	return EXIT_SUCCESS;
@@ -130,16 +130,18 @@ int find_word_wrap_position()
 	int word_length = -1;
 	int vowel_position = -1;
 	int last_symb_pos = -1;
+	int wrap_position = -1;
 
 	word_length = find_word_length();
 	last_symb_pos = word_length - 1;
 
 	if (word_length > 3)
 	{
-		vowel_position = find_vowel_position(last_symb_pos, 3);
+		vowel_position = find_vowel_position(last_symb_pos, 2);
 		
 		printf("%d \n", vowel_position);
+		wrap_position = vowel_position + 1;
 	}
 
-	return -99;
+	return wrap_position;
 }
