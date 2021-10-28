@@ -18,7 +18,7 @@ Rules:
 
 int find_word_length();
 int is_vowel(char symb);
-int find_vowel_position(int last_pos);
+int find_vowel_position(int last_pos, int number);
 int find_word_wrap_position();
 int wrap_test(int expected_pos);
 
@@ -31,7 +31,7 @@ int wrap_test_v2(const char* str, int expected_pos);
 // global variables
 // ###########################################################################
 
-char word[MAXSIZE + 1] = "hello";
+char word[MAXSIZE + 1] = "aleksandra";
 char vowels_arr[] = "aeiou";
 
 // ###########################################################################
@@ -77,21 +77,27 @@ int find_word_length()
 }
 
 
-int find_vowel_position(int last_pos)
+int find_vowel_position(int last_pos, int number)
 {
 	int vowel_pos = -1;
-	//int pos = -1;
 	int result = 0;
-	for (int i = last_pos; (i > 0) && (result == 0); i--)
+
+	for (int n = 0; n < number; n++)
 	{
-		if (is_vowel(word[i]))
+		for (int i = last_pos; (i > 0) && (result == 0); i--)
 		{
-			vowel_pos = last_pos;
-			result = 1;
+			if (is_vowel(word[i]))
+			{
+				vowel_pos = last_pos;
+				result = 1;
+			}
+									// TO DO: if there is no vowels
+			last_pos--;
 		}
-		// TO DO: if there is no vowels
-		last_pos--;
+		last_pos = vowel_pos - 1;
+		result = 0;
 	}
+
 	return vowel_pos;
 }
 
@@ -130,16 +136,10 @@ int find_word_wrap_position()
 
 	if (word_length > 3)
 	{
-		for (int i = 0; i < 2; i++)
-		{
-			vowel_position = find_vowel_position(last_symb_pos);
-			last_symb_pos = vowel_position - 1;
-		}
-
+		vowel_position = find_vowel_position(last_symb_pos, 3);
+		
 		printf("%d \n", vowel_position);
 	}
-
-
 
 	return -99;
 }
