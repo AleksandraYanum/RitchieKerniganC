@@ -17,6 +17,7 @@ Rules:
 // ###########################################################################
 
 int find_word_length();
+int is_vowel(char symb);
 
 /*
 int find_word_wrap_position_v2(const char* str);
@@ -28,6 +29,7 @@ int wrap_test_v2(const char* str, int expected_pos);
 // ###########################################################################
 
 char word[MAXSIZE + 1] = "hello";
+char vowels_arr[] = "aeiou";
 
 // ###########################################################################
 
@@ -66,4 +68,19 @@ int find_word_length()
 		count++;
 	}
 	return count;
+}
+
+
+int is_vowel(char symb)
+{
+	int result = 0;
+	for (int i = 0; (vowels_arr[i] != '\0') && (result == 0); i++)
+	{
+		if (symb == vowels_arr[i])
+		{
+			result = 1;
+		}
+
+	}
+	return result;
 }
