@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* 
+/*
 function takes the word from the global array XXX and limit_position to wrap the word
 Returns the top right possible position of word wrap, otherwise -1
 Rules:
@@ -45,7 +45,7 @@ int main()
 	printf("Test2 %s \n", test1_result == 1 ? "passed" : "failed");
 	*/
 
-	int test1_result = wrap_test(6);
+	int test1_result = wrap_test(-1);
 	printf("Test1 %s \n", test1_result == 1 ? "passed" : "failed");
 
 	return EXIT_SUCCESS;
@@ -91,7 +91,7 @@ int find_vowel_position(int last_pos, int number)
 				vowel_pos = last_pos;
 				result = 1;
 			}
-									// TO DO: if there is no vowels
+			// TO DO: if there is no vowels
 			last_pos--;
 		}
 		last_pos = vowel_pos - 1;
@@ -129,17 +129,17 @@ int find_word_wrap_position()
 {
 	int word_length = -1;
 	int vowel_position = -1;
-	int last_symb_pos = -1;
+	int last_symb_position = -1;
 	int wrap_position = -1;
 
 	word_length = find_word_length();
-	last_symb_pos = word_length - 1;
+	last_symb_position = word_length - 1;
 
 	if (word_length > 3)
 	{
-		vowel_position = find_vowel_position(last_symb_pos, 2);
-		printf("Vowel_position = %d\n", vowel_position);
+		vowel_position = find_vowel_position(last_symb_position, 2);
 
+		printf("Vowel_position = %d\n", vowel_position);
 		if (vowel_position > 0)
 		{
 			wrap_position = vowel_position + 1;
