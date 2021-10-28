@@ -84,7 +84,7 @@ int find_vowel_position(int last_pos, int number)
 
 	for (int n = 0; n < number; n++)
 	{
-		for (int i = last_pos; (i > 0) && (result == 0); i--)
+		for (int i = last_pos; (i >= 0) && (result == 0); i--)
 		{
 			if (is_vowel(word[i]))
 			{
