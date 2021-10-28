@@ -19,7 +19,7 @@ Rules:
 int find_word_length();
 int is_vowel(char symb);
 int find_vowel_position(int last_pos, int number);
-int find_word_wrap_position();
+int find_word_wrap_position(); // if -1 it is impossible to wrap
 int wrap_test(int expected_pos);
 
 /*
@@ -138,9 +138,13 @@ int find_word_wrap_position()
 	if (word_length > 3)
 	{
 		vowel_position = find_vowel_position(last_symb_pos, 2);
-		
-		printf("%d \n", vowel_position);
-		wrap_position = vowel_position + 1;
+		printf("Vowel_position = %d\n", vowel_position);
+
+		if (vowel_position > 0)
+		{
+			wrap_position = vowel_position + 1;
+		}
+		printf("Pos to wrap = %d\n", wrap_position);
 	}
 
 	return wrap_position;
