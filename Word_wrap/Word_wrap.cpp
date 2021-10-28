@@ -18,6 +18,7 @@ Rules:
 
 int find_word_length();
 int is_vowel(char symb);
+int find_vowel_position(int last_pos);
 
 /*
 int find_word_wrap_position_v2(const char* str);
@@ -70,6 +71,24 @@ int find_word_length()
 	return count;
 }
 
+
+int find_vowel_position(int last_pos)
+{
+	int vowel_pos = -1;
+	//int pos = -1;
+	int result = 0;
+	for (int i = last_pos; (i > 0) && (result == 0); i--)
+	{
+		if (is_vowel(word[i]))
+		{
+			vowel_pos = last_pos;
+			result = 1;
+		}
+		// TO DO: if there is no vowels
+		last_pos--;
+	}
+	return vowel_pos;
+}
 
 int is_vowel(char symb)
 {
