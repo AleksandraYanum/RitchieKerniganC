@@ -34,10 +34,16 @@ int wrap_test_v2(const char* str, int expected_pos);
 char word[MAXSIZE + 1] = "home";
 char vowels_arr[] = "aeiou";
 
+char test1[] = "hello";
+char test2[] = "uncle";
+char test3[] = "bbba";
+
 // ###########################################################################
 
 int main()
 {
+	int test_result = -1;
+
 	/*
 	int test1_result = wrap_test_v2("uncle", -1);
 	printf("Test1 %s \n", test1_result == 1 ? "passed" : "failed");
@@ -45,8 +51,20 @@ int main()
 	printf("Test2 %s \n", test1_result == 1 ? "passed" : "failed");
 	*/
 
-	int test1_result = wrap_test(-1);
-	printf("Test1 %s \n", test1_result == 1 ? "passed" : "failed");
+	
+	//TODO: add "hello" to array word
+	test_result = wrap_test(2);
+	printf("Test1 %s \n", test_result == 1 ? "passed" : "failed");
+
+	//TODO: add "uncle" to array word
+	test_result = wrap_test(-1);
+	printf("Test2 %s \n", test_result == 1 ? "passed" : "failed");
+
+	//TODO: add "bbba" to array word
+	test_result = wrap_test(-1);
+	printf("Test3 %s \n", test_result == 1 ? "passed" : "failed");
+
+
 
 	return EXIT_SUCCESS;
 }
