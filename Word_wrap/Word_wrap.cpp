@@ -31,7 +31,7 @@ int wrap_test_v2(const char* str, int expected_pos);
 // global variables
 // ###########################################################################
 
-char word[MAXSIZE + 1] = "aleksandra";
+char word[MAXSIZE + 1] = "home";
 char vowels_arr[] = "aeiou";
 
 // ###########################################################################
@@ -94,8 +94,15 @@ int find_vowel_position(int last_pos, int number)
 			// TO DO: if there is no vowels
 			last_pos--;
 		}
-		last_pos = vowel_pos - 1;
-		result = 0;
+		if ((last_pos < 0) && (result == 0))
+		{
+			vowel_pos = -1;
+		}
+		else
+		{
+			last_pos = vowel_pos - 1;
+			result = 0;
+		}
 	}
 
 	return vowel_pos;
@@ -139,7 +146,7 @@ int find_word_wrap_position()
 	{
 		vowel_position = find_vowel_position(last_symb_position, 2);
 
-		printf("Vowel_position = %d\n", vowel_position);
+		printf("Vowel position = %d\n", vowel_position);
 		if (vowel_position > 0)
 		{
 			wrap_position = vowel_position + 1;
