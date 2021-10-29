@@ -159,9 +159,6 @@ int main()
 	test_result = wrap_test(3);
 	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
 
-
-
-
 	return EXIT_SUCCESS;
 }
 
@@ -218,7 +215,6 @@ int find_vowel_position(int last_pos, int number)
 			result = 0;
 		}
 	}
-
 	return vowel_pos;
 }
 
@@ -275,6 +271,5 @@ int find_word_wrap_position()
 		}
 		//printf("Pos to wrap = %d\n", wrap_position);
 	}
-
 	return wrap_position;
 }
