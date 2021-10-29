@@ -31,18 +31,27 @@ int wrap_test_v2(const char* str, int expected_pos);
 // global variables
 // ###########################################################################
 
-char word[MAXSIZE + 1] = "home";
+char word[MAXSIZE + 1];
 char vowels_arr[] = "aeiou";
 
-char test1[] = "hello";
-char test2[] = "uncle";
-char test3[] = "bbba";
+char test1[] = "hello"; //2
+char test2[] = "uncle"; //-1
+char test3[] = "bbba"; //-1
+char test4[] = "programmer"; //6
+char test5[] = "Jaromir"; //4
+char test6[] = "kitten"; //2
+char test7[] = "spaaain"; //5
+char test8[] = "bbbbb"; //-1
+char test9[] = "aaaa"; //2
+char test10[] = "sun"; //-1
+char test11[] = "ocean"; //-1
 
 // ###########################################################################
 
 int main()
 {
 	int test_result = -1;
+	int i = 0;
 
 	/*
 	int test1_result = wrap_test_v2("uncle", -1);
@@ -51,18 +60,105 @@ int main()
 	printf("Test2 %s \n", test1_result == 1 ? "passed" : "failed");
 	*/
 
-	
-	//TODO: add "hello" to array word
+	//Add "hello" from array test1 to array word
+	for (i = 0; test1[i] != '\0'; i++)
+	{
+		word[i] = test1[i];
+	}
+	word[i] = '\0';
 	test_result = wrap_test(2);
-	printf("Test1 %s \n", test_result == 1 ? "passed" : "failed");
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
 
-	//TODO: add "uncle" to array word
+	//Add "uncle" from array test2 to array word
+	for (i = 0; test2[i] != '\0'; i++)
+	{
+		word[i] = test2[i];
+	}
+	word[i] = '\0';
 	test_result = wrap_test(-1);
-	printf("Test2 %s \n", test_result == 1 ? "passed" : "failed");
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
 
-	//TODO: add "bbba" to array word
+	//Add "bbba" from array test3 to array word
+	for (i = 0; test3[i] != '\0'; i++)
+	{
+		word[i] = test3[i];
+	}
+	word[i] = '\0';
 	test_result = wrap_test(-1);
-	printf("Test3 %s \n", test_result == 1 ? "passed" : "failed");
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+
+	//Add "programmer" from array test4 to array word
+	for (i = 0; test4[i] != '\0'; i++)
+	{
+		word[i] = test4[i];
+	}
+	word[i] = '\0';
+	test_result = wrap_test(6);
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+
+	//Add "Jaromir" from array test5 to array word
+	for (i = 0; test5[i] != '\0'; i++)
+	{
+		word[i] = test5[i];
+	}
+	word[i] = '\0';
+	test_result = wrap_test(4);
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+
+	//Add "kitten" from array test6 to array word
+	for (i = 0; test6[i] != '\0'; i++)
+	{
+		word[i] = test6[i];
+	}
+	word[i] = '\0';
+	test_result = wrap_test(2);
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+
+	//Add "spaaain" from array test7 to array word
+	for (i = 0; test7[i] != '\0'; i++)
+	{
+		word[i] = test7[i];
+	}
+	word[i] = '\0';
+	test_result = wrap_test(5);
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+
+	//Add "bbbbb" from array test8 to array word
+	for (i = 0; test8[i] != '\0'; i++)
+	{
+		word[i] = test8[i];
+	}
+	word[i] = '\0';
+	test_result = wrap_test(-1);
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+
+	//Add "aaaa" from array test9 to array word
+	for (i = 0; test9[i] != '\0'; i++)
+	{
+		word[i] = test9[i];
+	}
+	word[i] = '\0';
+	test_result = wrap_test(2);
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+
+	//Add "sun" from array test10 to array word
+	for (i = 0; test10[i] != '\0'; i++)
+	{
+		word[i] = test10[i];
+	}
+	word[i] = '\0';
+	test_result = wrap_test(-1);
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+
+	//Add "ocean" from array test11 to array word
+	for (i = 0; test11[i] != '\0'; i++)
+	{
+		word[i] = test11[i];
+	}
+	word[i] = '\0';
+	test_result = wrap_test(3);
+	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+
 
 
 
