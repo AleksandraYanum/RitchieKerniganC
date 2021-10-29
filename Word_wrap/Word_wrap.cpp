@@ -260,12 +260,12 @@ int find_word_wrap_position()
 	{
 		vowel_position = find_vowel_position(last_symb_position, 2);
 
-		printf("Vowel position = %d\n", vowel_position);
+		//printf("Vowel position = %d\n", vowel_position);
 		if (vowel_position > 0)
 		{
 			wrap_position = vowel_position + 1;
 		}
-		printf("Pos to wrap = %d\n", wrap_position);
+		//printf("Pos to wrap = %d\n", wrap_position);
 	}
 
 	return wrap_position;
