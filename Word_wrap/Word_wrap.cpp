@@ -21,6 +21,7 @@ int is_vowel(char symb);
 int find_vowel_position(int last_pos, int number);
 int find_word_wrap_position(); // if -1 it is impossible to wrap
 int wrap_test(int expected_pos);
+void print_test_result(int test_result);
 
 /*
 int find_word_wrap_position_v2(const char* str);
@@ -37,7 +38,7 @@ char vowels_arr[] = "aeiou";
 char test1[] = "hello"; //2
 char test2[] = "uncle"; //-1
 char test3[] = "bbba"; //-1
-char test4[] = "programmer"; //6
+char test4[] = "moloko"; //6
 char test5[] = "Jaromir"; //4
 char test6[] = "kitten"; //2
 char test7[] = "spaaain"; //5
@@ -67,7 +68,7 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(2);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	//Add "uncle" from array test2 to array word
 	for (i = 0; test2[i] != '\0'; i++)
@@ -76,7 +77,7 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(-1);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	//Add "bbba" from array test3 to array word
 	for (i = 0; test3[i] != '\0'; i++)
@@ -85,16 +86,16 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(-1);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
-	//Add "programmer" from array test4 to array word
+	//Add "moloko" from array test4 to array word
 	for (i = 0; test4[i] != '\0'; i++)
 	{
 		word[i] = test4[i];
 	}
 	word[i] = '\0';
 	test_result = wrap_test(6);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	//Add "Jaromir" from array test5 to array word
 	for (i = 0; test5[i] != '\0'; i++)
@@ -103,7 +104,7 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(4);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	//Add "kitten" from array test6 to array word
 	for (i = 0; test6[i] != '\0'; i++)
@@ -112,7 +113,7 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(2);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	//Add "spaaain" from array test7 to array word
 	for (i = 0; test7[i] != '\0'; i++)
@@ -121,7 +122,7 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(5);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	//Add "bbbbb" from array test8 to array word
 	for (i = 0; test8[i] != '\0'; i++)
@@ -130,7 +131,7 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(-1);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	//Add "aaaa" from array test9 to array word
 	for (i = 0; test9[i] != '\0'; i++)
@@ -139,7 +140,7 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(2);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	//Add "sun" from array test10 to array word
 	for (i = 0; test10[i] != '\0'; i++)
@@ -148,7 +149,7 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(-1);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	//Add "ocean" from array test11 to array word
 	for (i = 0; test11[i] != '\0'; i++)
@@ -157,7 +158,7 @@ int main()
 	}
 	word[i] = '\0';
 	test_result = wrap_test(3);
-	printf("Test %s %s \n\n", word, test_result == 1 ? "passed" : "failed");
+	print_test_result(test_result);
 
 	return EXIT_SUCCESS;
 }
@@ -272,4 +273,10 @@ int find_word_wrap_position()
 		//printf("Pos to wrap = %d\n", wrap_position);
 	}
 	return wrap_position;
+}
+
+void print_test_result(int test_result)
+{
+	printf("Test %s:\t\t%s \n", word, test_result == 1 ? "PASSED" : "FAILED");
+	return;
 }
