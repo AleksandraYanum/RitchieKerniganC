@@ -7,7 +7,7 @@ Version_2: Program wraps words partially
 NB! Program accept words for input no longer than MAXSIZE letters
 */
 
-# define MAXSIZE 50 //max size of the symbol array; it's also the length of line
+# define MAXSIZE 10 //max size of symbol array in the output string. Enter can have 11th position
 
 // ###########################################################################
 // global variables
@@ -38,7 +38,7 @@ Rules:
 2. Each part should contain vowel letter (a, e, u, etc)
 3. Wrapping ends with vowel letter (e.g. hello -> he--llo)
 */
-int find_word_wrap_position(int limit_position);
+int find_word_wrap_position();
 	
 // ###########################################################################
 
@@ -138,7 +138,7 @@ void array_left_shift()
 	return;
 }
 
-int find_word_wrap_position(int limit_position)
+int find_word_wrap_position()
 {
 	return -1;
 }
