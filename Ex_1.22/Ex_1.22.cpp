@@ -27,6 +27,8 @@ int wrap_position = -1;
 // functions
 // ###########################################################################
 
+void symbol_handler();
+void wrap_handler();
 void print_array(int print_to); 
 void find_delimiter_limit_to_print();
 void init_array(int index_from, int index_to);
@@ -47,8 +49,6 @@ int find_word_wrap_position();
 int is_vowel(char symb);
 int find_vowel_position(int last_pos, int number);
 
-
-
 // ###########################################################################
 
 int main()
@@ -59,46 +59,15 @@ int main()
 	{
 		if (pos < MAXSIZE)
 		{
-			symb_arr[pos] = c;
-			pos++;
-			if (is_delimiter(c))
-			{
-				pos_after_delimiter = pos;
-			}
-			if (c == '\n')
-			{
-				print_array(pos);
-				pos = 0;
-				pos_after_delimiter = -1;
-			}
+			symbol_handler();
 		}
-
 		else if (pos == MAXSIZE)
 		{
-			find_delimiter_limit_to_print();
-			print_array(print_to);
-			shift_array_by_delimiter();
-									
-			wrap_position = find_word_wrap_position();
-			if (wrap_position != NO_WRAP)
-			{
-				print_array(wrap_position);
-				putchar('-');
-				shift_array_by_wrap();
-			}
-			putchar('\n');
-			
-			if (c != '\n')
-			{
-				symb_arr[pos] = c;
-			}
-			pos++;
-			pos_after_delimiter = is_delimiter(c) ? pos : -1;
+			wrap_handler();
 		}
 	}
 
 	print_array(pos);
-	
 	return EXIT_SUCCESS;
 }
 
@@ -114,6 +83,49 @@ int is_delimiter(char c)
 		}
 	}
 	return result;
+}
+
+
+void symbol_handler()
+{
+	symb_arr[pos] = c;
+	pos++;
+	if (is_delimiter(c))
+	{
+		pos_after_delimiter = pos;
+	}
+	if (c == '\n')
+	{
+		print_array(pos);
+		pos = 0;
+		pos_after_delimiter = -1;
+	}
+	return;
+}
+
+
+void wrap_handler()
+{
+	find_delimiter_limit_to_print();
+	print_array(print_to);
+	shift_array_by_delimiter();
+
+	wrap_position = find_word_wrap_position();
+	if (wrap_position != NO_WRAP)
+	{
+		print_array(wrap_position);
+		putchar('-');
+		shift_array_by_wrap();
+	}
+	putchar('\n');
+
+	if (c != '\n')
+	{
+		symb_arr[pos] = c;
+	}
+	pos++;
+	pos_after_delimiter = is_delimiter(c) ? pos : -1;
+	return;
 }
 
 
@@ -251,12 +263,3 @@ int find_word_wrap_position()
 	}
 	return wrap_position;
 }
-
-
-/*
-int find_word_wrap_position()
-{
-	wrap_position = 6;
-	return wrap_position;
-}
-*/
