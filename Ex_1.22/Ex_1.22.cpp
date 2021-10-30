@@ -30,6 +30,9 @@ void find_limit_to_print();
 void init_array(int index_from, int index_to);
 void array_left_shift(int left_pos_to_shift);
 int is_delimiter(char c);
+void shift_array_by_delimiter();
+void shift_array_by_wrap();
+
 
 /* 
 function takes the word from the global array XXX and limit_position to wrap the word
@@ -70,25 +73,19 @@ int main()
 		{
 			find_limit_to_print();
 			print_array(print_to, 0);
-			array_left_shift(pos_after_delimiter);
-			int last_symb = pos;
-			pos = (pos_after_delimiter > -1) ? (pos - pos_after_delimiter) : 0;
-			init_array(pos, last_symb);
-			
+			shift_array_by_delimiter();
+									
 			wrap_position = find_word_wrap_position();
 			if (wrap_position == -1)
 			{
-				putchar('\n');
+				putchar('\n'); //!!!!!!!!!!!
 			}
 			else
 			{
 				print_array(wrap_position, 0);
 				putchar('\n');
 			}
-			array_left_shift(wrap_position);
-			last_symb = pos;
-			pos = pos - wrap_position;
-			init_array(pos, last_symb);
+			shift_array_by_wrap();
 
 			if (c != '\n')
 			{
@@ -152,6 +149,24 @@ void array_left_shift(int left_pos_to_shift)
 		symb_arr[i - left_pos_to_shift] = symb_arr[i];
 
 	}
+	return;
+}
+
+void shift_array_by_delimiter()
+{
+	array_left_shift(pos_after_delimiter);
+	int last_symb = pos;
+	pos = (pos_after_delimiter > -1) ? (pos - pos_after_delimiter) : 0;
+	init_array(pos, last_symb);
+	return;
+}
+
+void shift_array_by_wrap()
+{
+	array_left_shift(wrap_position);
+	int last_symb = pos;
+	pos = pos - wrap_position;
+	init_array(pos, last_symb);
 	return;
 }
 
