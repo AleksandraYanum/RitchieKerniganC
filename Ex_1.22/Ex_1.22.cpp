@@ -83,6 +83,7 @@ int main()
 			if (wrap_position != NO_WRAP)
 			{
 				print_array(wrap_position);
+				putchar('-');
 				shift_array_by_wrap();
 			}
 			putchar('\n');
