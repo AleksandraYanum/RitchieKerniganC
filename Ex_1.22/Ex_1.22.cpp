@@ -8,6 +8,7 @@ NB! Program accept words for input no longer than MAXSIZE letters
 */
 
 # define MAXSIZE 15 //max size of symbol array in the output string. Enter can have 11th position
+# define NO_WRAP -1 
 
 // ###########################################################################
 // global variables
@@ -26,7 +27,7 @@ int wrap_position = -1;
 // ###########################################################################
 
 void print_array(int print_to, int is_new_line); //is_new_line: 1 - to print enter, 0 - not to print
-void find_limit_to_print();
+void find_delimiter_limit_to_print();
 void init_array(int index_from, int index_to);
 void array_left_shift(int left_pos_to_shift);
 int is_delimiter(char c);
@@ -54,7 +55,6 @@ int main()
 	{
 		if (pos < MAXSIZE)
 		{
-			
 			symb_arr[pos] = c;
 			pos++;
 			if (is_delimiter(c))
@@ -71,22 +71,18 @@ int main()
 
 		else if (pos == MAXSIZE)
 		{
-			find_limit_to_print();
+			find_delimiter_limit_to_print();
 			print_array(print_to, 0);
 			shift_array_by_delimiter();
 									
 			wrap_position = find_word_wrap_position();
-			if (wrap_position == -1)
-			{
-				putchar('\n'); //!!!!!!!!!!!
-			}
-			else
+			if (wrap_position != NO_WRAP)
 			{
 				print_array(wrap_position, 0);
-				putchar('\n');
+				shift_array_by_wrap();
 			}
-			shift_array_by_wrap();
-
+			putchar('\n');
+			
 			if (c != '\n')
 			{
 				symb_arr[pos] = c;
@@ -114,7 +110,7 @@ int is_delimiter(char c)
 	return result;
 }
 
-void find_limit_to_print()
+void find_delimiter_limit_to_print()
 {
 	print_to = (pos_after_delimiter > -1) ? pos_after_delimiter : pos;
 	return;
