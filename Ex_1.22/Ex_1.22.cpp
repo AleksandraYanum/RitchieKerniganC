@@ -26,7 +26,7 @@ int wrap_position = -1;
 // functions
 // ###########################################################################
 
-void print_array(int print_to, int is_new_line); //is_new_line: 1 - to print enter, 0 - not to print
+void print_array(int print_to); 
 void find_delimiter_limit_to_print();
 void init_array(int index_from, int index_to);
 void array_left_shift(int left_pos_to_shift);
@@ -63,7 +63,7 @@ int main()
 			}
 			if (c == '\n')
 			{
-				print_array(pos, 0);
+				print_array(pos);
 				pos = 0;
 				pos_after_delimiter = -1;
 			}
@@ -72,13 +72,13 @@ int main()
 		else if (pos == MAXSIZE)
 		{
 			find_delimiter_limit_to_print();
-			print_array(print_to, 0);
+			print_array(print_to);
 			shift_array_by_delimiter();
 									
 			wrap_position = find_word_wrap_position();
 			if (wrap_position != NO_WRAP)
 			{
-				print_array(wrap_position, 0);
+				print_array(wrap_position);
 				shift_array_by_wrap();
 			}
 			putchar('\n');
@@ -92,7 +92,7 @@ int main()
 		}
 	}
 
-	print_array(pos, 0);
+	print_array(pos);
 	
 	return EXIT_SUCCESS;
 }
@@ -116,15 +116,11 @@ void find_delimiter_limit_to_print()
 	return;
 }
 
-void print_array(int print_to, int is_new_line)
+void print_array(int print_to)
 {
 	for (int i = 0; i < print_to; i++)
 	{
 		putchar(symb_arr[i]);
-	}
-	if (is_new_line == 1)
-	{
-		putchar('\n');
 	}
 	return;
 }
