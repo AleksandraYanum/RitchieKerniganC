@@ -7,7 +7,7 @@ Version_2: Program wraps words partially
 NB! Program accept words for input no longer than MAXSIZE letters
 */
 
-# define MAXSIZE 10 //max size of symbol array in the output string. Enter can have 11th position
+# define MAXSIZE 15 //max size of symbol array in the output string. Enter can have 11th position
 
 // ###########################################################################
 // global variables
@@ -28,7 +28,7 @@ int wrap_position = -1;
 void print_array(int print_to, int is_new_line); //is_new_line: 1 - to print enter, 0 - not to print
 void find_limit_to_print();
 void init_array(int index_from, int index_to);
-void array_left_shift(int left_pos_to_shift, int right_pos_to_shift);
+void array_left_shift(int left_pos_to_shift);
 int is_delimiter(char c);
 
 /* 
@@ -69,12 +69,12 @@ int main()
 		else if (pos == MAXSIZE)
 		{
 			find_limit_to_print();
-			print_array(print_to, 1);
-			array_left_shift(pos_after_delimiter, pos);
+			print_array(print_to, 0);
+			array_left_shift(pos_after_delimiter);
 			int last_symb = pos;
 			pos = (pos_after_delimiter > -1) ? (pos - pos_after_delimiter) : 0;
 			init_array(pos, last_symb);
-			/*
+			
 			wrap_position = find_word_wrap_position();
 			if (wrap_position == -1)
 			{
@@ -85,7 +85,10 @@ int main()
 				print_array(wrap_position, 0);
 				putchar('\n');
 			}
-			*/
+			array_left_shift(wrap_position);
+			last_symb = pos;
+			pos = pos - wrap_position;
+			init_array(pos, last_symb);
 
 			if (c != '\n')
 			{
@@ -142,9 +145,9 @@ void init_array(int index_from, int index_to)
 	return;
 }
 
-void array_left_shift(int left_pos_to_shift, int right_pos_to_shift)
+void array_left_shift(int left_pos_to_shift)
 {
-	for (int i = left_pos_to_shift; i < right_pos_to_shift; i++)
+	for (int i = left_pos_to_shift; i < pos; i++)
 	{
 		symb_arr[i - left_pos_to_shift] = symb_arr[i];
 
@@ -154,6 +157,6 @@ void array_left_shift(int left_pos_to_shift, int right_pos_to_shift)
 
 int find_word_wrap_position()
 {
-	wrap_position = 2;
+	wrap_position = 6;
 	return wrap_position;
 }
