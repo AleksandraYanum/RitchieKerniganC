@@ -7,7 +7,7 @@ Version_2: Program wraps words partially
 NB! Program accept words for input no longer than MAXSIZE letters
 */
 
-# define MAXSIZE 15 //max size of symbol array in the output string. Enter can have 11th position
+# define MAXSIZE 40 //max size of symbol array in the output string. Enter can have 11th position
 # define NO_WRAP -1 
 
 // ###########################################################################
