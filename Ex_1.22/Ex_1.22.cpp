@@ -16,9 +16,10 @@ NB! Program accept words for input no longer than MAXSIZE letters
 char c;
 char symb_arr[MAXSIZE + 1];
 int pos = 0; // position of the next symbol in input
-int delimiter_pos = -1; // position after the last delimiter
+int pos_after_delimiter = -1; // position after the last delimiter
 int print_to = -1; //the element to print array to
 char delimiter_arr[] = " /\\()\"\'-.,:;<>~!@#$%^&*|+=[]{}~\?│";
+int wrap_position = -1;
 
 // ###########################################################################
 // functions
@@ -55,30 +56,43 @@ int main()
 			pos++;
 			if (is_delimiter(c))
 			{
-				delimiter_pos = pos;
+				pos_after_delimiter = pos;
 			}
 			if (c == '\n')
 			{
 				print_array(pos, 0);
 				pos = 0;
-				delimiter_pos = -1;
+				pos_after_delimiter = -1;
 			}
 		}
 
 		else if (pos == MAXSIZE)
 		{
 			find_limit_to_print();
-			print_array(print_to, 1);
+			print_array(print_to, 0);
 			array_left_shift();
 			int last_symb = pos;
-			pos = (delimiter_pos > -1) ? (pos - delimiter_pos) : 0;
+			pos = (pos_after_delimiter > -1) ? (pos - pos_after_delimiter) : 0;
 			init_array(pos, last_symb);
+
+			wrap_position = find_word_wrap_position();
+			if (wrap_position == -1)
+			{
+				putchar('\n');
+			}
+			else
+			{
+				print_array(wrap_position, 0);
+				putchar('\n');
+			}
+			
+
 			if (c != '\n')
 			{
 				symb_arr[pos] = c;
 			}
 			pos++;
-			delimiter_pos = is_delimiter(c) ? pos : -1;
+			pos_after_delimiter = is_delimiter(c) ? pos : -1;
 		}
 	}
 
@@ -102,7 +116,7 @@ int is_delimiter(char c)
 
 void find_limit_to_print()
 {
-	print_to = (delimiter_pos > -1) ? delimiter_pos : pos;
+	print_to = (pos_after_delimiter > -1) ? pos_after_delimiter : pos;
 	return;
 }
 
@@ -130,9 +144,9 @@ void init_array(int index_from, int index_to)
 
 void array_left_shift()
 {
-	for (int i = delimiter_pos; i < pos; i++)
+	for (int i = pos_after_delimiter; i < pos; i++)
 	{
-		symb_arr[i - delimiter_pos] = symb_arr[i];
+		symb_arr[i - pos_after_delimiter] = symb_arr[i];
 
 	}
 	return;
@@ -140,5 +154,6 @@ void array_left_shift()
 
 int find_word_wrap_position()
 {
-	return -1;
+	wrap_position = 2;
+	return wrap_position;
 }
