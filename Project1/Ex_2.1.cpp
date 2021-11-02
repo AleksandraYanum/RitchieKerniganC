@@ -15,6 +15,10 @@ int main()
 	printf("Signed int: min %d, max %d\n", INT_MIN, INT_MAX);
 	printf("Unsigned int: min %d, max %u\n", 0, UINT_MAX);
 
+	printf("Signed short int: min %d, max %d\n", SHRT_MIN, SHRT_MAX);
+	printf("Unsigned short int: min %d, max %u\n", 0, USHRT_MAX);
+
+
 	return EXIT_SUCCESS;
 }
 
