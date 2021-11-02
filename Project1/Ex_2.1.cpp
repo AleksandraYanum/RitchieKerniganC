@@ -18,6 +18,9 @@ int main()
 	printf("Signed short int: min %d, max %d\n", SHRT_MIN, SHRT_MAX);
 	printf("Unsigned short int: min %d, max %u\n", 0, USHRT_MAX);
 
+	printf("Signed long int: min %ld, max %ld\n", LONG_MIN, LONG_MAX);
+	printf("Unsigned long int: min %d, max %lu\n", 0, ULONG_MAX);
+
 
 	return EXIT_SUCCESS;
 }
