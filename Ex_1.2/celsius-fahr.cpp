@@ -6,7 +6,7 @@ int main()
     int lower, upper, step;
 
     lower = 0;
-    upper = 50;
+    upper = 60;
     celsius = lower;
     step = 10;
 
@@ -16,5 +16,4 @@ int main()
         fahr = 9 * (celsius + 32) / 5;
         printf("\t%d\t%d\n", celsius, fahr);
         celsius = celsius + step;
-    
 }
