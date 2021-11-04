@@ -6,7 +6,7 @@ int main()
     int lower, upper, step;
 
     lower = 0;
-    upper = 60;
+    upper = 50;
     celsius = lower;
     step = 10;
 
