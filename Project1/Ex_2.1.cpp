@@ -3,7 +3,10 @@
 #include <limits.h>
 #include <float.h>
 
-//
+/*
+Program determines ranges of char, short, intand long vars, both signedand unsigned,
+ranges of floating-point numbers by by printing  appropriatevalues from standard  header
+*/
 
 int main()
 {
@@ -21,6 +24,9 @@ int main()
 	printf("Signed long int: min %ld, max %ld\n", LONG_MIN, LONG_MAX);
 	printf("Unsigned long int: min %d, max %lu\n", 0, ULONG_MAX);
 
+	printf("Float: min %e, max %e\n", FLT_MIN, FLT_MAX);
+	printf("Double: min %e, max %e\n", DBL_MIN, DBL_MAX);
+	printf("Long double: min %Le, max %Le\n", LDBL_MIN, LDBL_MAX);
 
 	return EXIT_SUCCESS;
 }
