@@ -10,23 +10,25 @@ for (i = 0; i < lim-1 && (ñ = getchar()) != EOF && ñ != '\n'; ++i)
  without operators && and ||
 */
 
-# define LIM 10
+# define LIM 3
 
 int main()
 {
 	char c;
 	char s[LIM];
+	int not_loop_exit = 1; //if 1 - not loop exit, continue
 
-	for (int i = 0; i < LIM - 1; i++)
+	for (int i = 0; not_loop_exit; i++)
 	{
-		if ((c = getchar()) != EOF)
+		not_loop_exit = (i < LIM - 1) && 
+					((c = getchar()) != EOF) && 
+					(c != '\n');
+		
+		if (not_loop_exit)
 		{
-			if (c != '\n')
-			{
-				s[i] = c;
-			}
+			s[i] = c;
 		}
-
+	
 	}
 
 	return EXIT_SUCCESS;
