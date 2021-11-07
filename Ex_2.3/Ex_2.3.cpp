@@ -11,13 +11,14 @@
 // ###########################################################################
 
 long int htoi(char s[]);
+int is_hexadecimal(char c);
 
 // ###########################################################################
 
 int main()
 {
 	long int n = 0;
-	char string[MAXSIZE] = "123AB";
+	char string[MAXSIZE] = "123AB---";
 	
 	n = htoi(string);
 	printf("Integer equivalent is %ld", n);
@@ -31,7 +32,7 @@ long int htoi(char s[])
 	int hex = 0;
 	long int number = 0;
 
-	for (int i = 0; s[i] != '\0'; i++)
+	for (int i = 0; is_hexadecimal(s[i]); i++)
 	{
 		if (isdigit(s[i]))
 		{
@@ -48,4 +49,17 @@ long int htoi(char s[])
 		number = 16 * number + hex;
 	}
 	return number;
+}
+
+
+int is_hexadecimal(char c)
+{
+	int result = 0;
+	if ((c >= '0' && c <= '9') ||
+		(c >= 'A' && c <= 'F') ||
+		(c >= 'a' && c <= 'f'))
+	{
+			result = 1;
+	}
+	return result;
 }
