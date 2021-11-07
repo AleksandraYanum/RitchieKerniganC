@@ -16,30 +16,11 @@ long int htoi(char s[]);
 
 int main()
 {
-
+	long int n = 0;
 	char string[MAXSIZE] = "123AB";
-	char c; 
-	int hex = 0;
-	long int number = 0;
-
-	for (int i = 0; string[i] != '\0'; i++)
-	{
-		if (isdigit(string[i]))
-		{
-			hex = string[i] - '0';
-		}
-		if (string[i] >= 'A' && string[i] <= 'F')
-		{
-			hex = string[i] - 'A' + 10;
-		}
-		if (string[i] >= 'a' && string[i] <= 'f')
-		{
-			hex = string[i] - 'a' + 10;
-		}
-		number = 16 * number + hex;
-	}
-
-	printf("Integer equivalent is %ld", number);
+	
+	n = htoi(string);
+	printf("Integer equivalent is %ld", n);
 	
 	return EXIT_SUCCESS;
 }
@@ -47,5 +28,24 @@ int main()
 
 long int htoi(char s[])
 {
-	return 0;
+	int hex = 0;
+	long int number = 0;
+
+	for (int i = 0; s[i] != '\0'; i++)
+	{
+		if (isdigit(s[i]))
+		{
+			hex = s[i] - '0';
+		}
+		if (s[i] >= 'A' && s[i] <= 'F')
+		{
+			hex = s[i] - 'A' + 10;
+		}
+		if (s[i] >= 'a' && s[i] <= 'f')
+		{
+			hex = s[i] - 'a' + 10;
+		}
+		number = 16 * number + hex;
+	}
+	return number;
 }
