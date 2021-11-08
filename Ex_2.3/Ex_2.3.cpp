@@ -22,6 +22,7 @@ int main()
 	char string[MAXSIZE] = "0xzwFF--";
 	
 	htoi_result = htoi(string);
+	
 	if (htoi_result > -1)
 	{
 		printf("Integer equivalent is %ld", htoi_result);
@@ -50,11 +51,11 @@ long int htoi(char s[])
 			{
 				hex = s[i] - '0';
 			}
-			if (s[i] >= 'A' && s[i] <= 'F')
+			else if (s[i] >= 'A' && s[i] <= 'F')
 			{
 				hex = s[i] - 'A' + 10;
 			}
-			if (s[i] >= 'a' && s[i] <= 'f')
+			else if (s[i] >= 'a' && s[i] <= 'f')
 			{
 				hex = s[i] - 'a' + 10;
 			}
@@ -63,7 +64,7 @@ long int htoi(char s[])
 	}
 	else
 	{
-		number = pos;
+		number = -1;
 	}
 	return number;
 }
@@ -83,7 +84,6 @@ int is_new_hex_digit(char s[])
 	char prev_symb = '\0';
 	int pos = -1;
 
-	
 	for (int i = 0; (s[i] != '\0') && (pos == -1); i++)
 	{
 		if ((s[i] == 'x' || s[i] == 'X') && (prev_symb == '0'))
