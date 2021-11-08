@@ -5,8 +5,6 @@
 // Program converts hexadecimal digits from string to integer value
 
 #define MAXSIZE 100
-#define IN 1
-#define OUT 0
 
 // ###########################################################################
 // functions
@@ -17,21 +15,22 @@ int is_hexadecimal(char c);
 int is_new_hex_digit(char s[]);
 
 // ###########################################################################
-// global variables
-// ###########################################################################
-
-int pos = -1;
-
-// ###########################################################################
 
 int main()
 {
-	long int n = 0;
-	char string[MAXSIZE] = "0X1F--";
+	long int htoi_result = -1;
+	char string[MAXSIZE] = "0xzwFF--";
 	
-	n = htoi(string);
+	htoi_result = htoi(string);
+	if (htoi_result > -1)
+	{
+		printf("Integer equivalent is %ld", htoi_result);
+	}
+	else
+	{
+		printf("Value is not a hexadecimal");
+	}
 
-	printf("Integer equivalent is %ld", n);
 	
 	return EXIT_SUCCESS;
 }
@@ -41,8 +40,9 @@ long int htoi(char s[])
 {
 	int hex = 0;
 	long int number = 0;
+	int pos = -1;
 
-	if (is_new_hex_digit(s))
+	if ((pos = is_new_hex_digit(s)) > -1)
 	{
 		for (int i = pos; is_hexadecimal(s[i]); i++)
 		{
@@ -61,35 +61,36 @@ long int htoi(char s[])
 			number = 16 * number + hex;
 		}
 	}
+	else
+	{
+		number = pos;
+	}
 	return number;
 }
 
 
 int is_hexadecimal(char c)
 {
-	int result = 0;
-	if ((c >= '0' && c <= '9') ||
-		(c >= 'A' && c <= 'F') ||
-		(c >= 'a' && c <= 'f'))
-	{
-			result = 1;
-	}
+	int result =	(c >= '0' && c <= '9') ||
+					(c >= 'A' && c <= 'F') ||
+					(c >= 'a' && c <= 'f');
+	
 	return result;
 }
 
 int is_new_hex_digit(char s[])
 {
-	char prev_symb = 0;
-	int result = 0;
+	char prev_symb = '\0';
+	int pos = -1;
+
 	
-	for (int i = 0; (s[i] != '\0') && (result == 0); i++)
+	for (int i = 0; (s[i] != '\0') && (pos == -1); i++)
 	{
 		if ((s[i] == 'x' || s[i] == 'X') && (prev_symb == '0'))
 		{
-			result = 1;
 			pos = i + 1;
 		}
 		prev_symb = s[i];
 	}
-	return result;
+	return pos;
 }
