@@ -18,7 +18,6 @@ int getline(char s[], int lim);
 
 int main()
 {
-	int len = 0;
 	char main_string[MAXSIZE];
 	char string_to_delete[MAXSIZE];
 
@@ -87,7 +86,7 @@ int getline(char s[], int lim)
 void deduplicate(char line[])
 {
 	int i = 0;
-	int j = i + 1;
+	int j = 1;
 	
 	while (line[i] != '\0')
 	{
@@ -109,8 +108,7 @@ void deduplicate(char line[])
 		i++;
 		j = i + 1;
 	}
-
-	printf("\nDeduplicated pattern is: \n%s\n", line);
+	//printf("\nDeduplicated pattern is: \n%s\n", line);
 	return;
 }
 
