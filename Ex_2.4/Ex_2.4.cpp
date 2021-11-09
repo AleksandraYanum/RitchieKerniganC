@@ -9,7 +9,8 @@
 // functions
 // ###########################################################################
 
-void squeeze(char source[], const char pattern[]);
+void squeeze(char source[], char pattern[]);
+void deduplicate(char line[]);
 int getline(char s[], int lim);
 
 // ###########################################################################
@@ -33,11 +34,12 @@ int main()
 }
 
 
-void squeeze(char source[], const char pattern[])
+void squeeze(char source[], char pattern[])
 {
 	int i = 0;
 	int j = 0;
 
+	deduplicate(pattern);
 	while (pattern[j] != '\0')
 	{
 		while (source[i] != '\0')
@@ -75,4 +77,11 @@ int getline(char s[], int lim)
 	}
 	s[end_of_line] = '\0';
 	return i;
+}
+
+
+void deduplicate(char line[])
+{
+
+	return;
 }
