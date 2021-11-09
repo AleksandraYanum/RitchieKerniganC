@@ -3,20 +3,28 @@
 
 //Program deletes each character in s1 that matches any character in the string s2
 
-#define MAXSIZE 100
+#define MAXSIZE 101
 
 // ###########################################################################
 // functions
 // ###########################################################################
 
-void squeeze(char s1[], char s2[]);
+void squeeze(char source[], const char pattern[]);
+int getline(char s[], int lim);
 
 // ###########################################################################
 
 int main()
 {
-	char main_string[MAXSIZE] = "alexyanum";
-	char string_to_delete[MAXSIZE] = "ay";
+	int len = 0;
+	char main_string[MAXSIZE];
+	char string_to_delete[MAXSIZE];
+
+	printf("Input main string no longer than %d symbols:\n", (MAXSIZE - 1));
+	getline(main_string, MAXSIZE);
+
+	printf("Input chars that should be deleted:\n");
+	getline(string_to_delete, MAXSIZE);
 
 	squeeze(main_string, string_to_delete);
 	printf("Modifyed string is:\n%s\n", main_string);
@@ -25,19 +33,20 @@ int main()
 }
 
 
-void squeeze(char s1[], char s2[])
+void squeeze(char source[], const char pattern[])
 {
 	int i, j, pos;
 
-	for (j = 0; s2[j] != '\0'; j++)
+	for (j = 0; pattern[j] != '\0'; j++)
 	{
-		for (i = 0; s1[i] != '\0'; i++)
+		for (i = 0; source[i] != '\0'; i++)
 		{
-			if (s1[i] == s2[j])
+			if (source[i] == pattern[j])
 			{
-				for (pos = i; s1[pos] != '\0'; pos++)
+				//shift source to 1 element left
+				for (pos = i; source[pos] != '\0'; pos++) 
 				{
-					s1[pos] = s1[pos + 1];
+					source[pos] = source[pos + 1];
 				}
 				i--;
 			}
@@ -45,4 +54,20 @@ void squeeze(char s1[], char s2[])
 	}
 
 	return;
+}
+
+
+int getline(char s[], int lim)
+{
+	int i;
+	int end_of_line = 0;
+	int c;
+	
+	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; i++)
+	{
+		s[i] = c;
+		end_of_line = i + 1;
+	}
+	s[end_of_line] = '\0';
+	return i;
 }
