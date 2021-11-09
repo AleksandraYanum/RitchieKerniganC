@@ -11,6 +11,7 @@
 
 void squeeze(char source[], char pattern[]);
 void deduplicate(char line[]);
+void copy_array(const char line_from[], char line_to[]);
 int getline(char s[], int lim);
 
 // ###########################################################################
@@ -38,8 +39,11 @@ void squeeze(char source[], char pattern[])
 {
 	int i = 0;
 	int j = 0;
+	char deduplicated_pattern[MAXSIZE];
 
+	copy_array(pattern, deduplicated_pattern);
 	deduplicate(pattern);
+
 	while (pattern[j] != '\0')
 	{
 		while (source[i] != '\0')
@@ -107,5 +111,12 @@ void deduplicate(char line[])
 	}
 
 	//printf("\nDeduplicated pattern is: \n%s\n", line);
+	return;
+}
+
+
+void copy_array(const char line_from[], char line_to[])
+{
+
 	return;
 }
