@@ -35,22 +35,29 @@ int main()
 
 void squeeze(char source[], const char pattern[])
 {
-	for ( int j = 0; pattern[j] != '\0'; j++)
+	int i = 0;
+	int j = 0;
+
+	while (pattern[j] != '\0')
 	{
-		for (int i = 0; source[i] != '\0'; i++)
+		while (source[i] != '\0')
 		{
-			if (source[i] == pattern[j])
+			if (source[i] != pattern[j])
 			{
-				//shift source to 1 element left
-				for (int pos = i; source[pos] != '\0'; pos++) 
+				i++;
+			}
+			else
+			{
+				//shift array to one element left
+				for (int pos = i; source[pos] != '\0'; pos++)
 				{
 					source[pos] = source[pos + 1];
 				}
-				i--;
 			}
 		}
+		i = 0;
+		j++;
 	}
-
 	return;
 }
 
