@@ -24,11 +24,11 @@ int main()
 	printf("Input main string no longer than %d symbols:\n", (MAXSIZE - 1));
 	getline(main_string, MAXSIZE);
 
-	printf("Input chars that should be deleted:\n");
+	printf("\nInput chars that should be deleted:\n");
 	getline(string_to_delete, MAXSIZE);
 
 	squeeze(main_string, string_to_delete);
-	printf("Modifyed string is:\n%s\n", main_string);
+	printf("\nModifyed string is:\n%s\n", main_string);
 
 	return EXIT_SUCCESS;
 }
@@ -82,6 +82,30 @@ int getline(char s[], int lim)
 
 void deduplicate(char line[])
 {
+	int i = 0;
+	int j = i + 1;
+	
+	while (line[i] != '\0')
+	{
+		while (line[j] != '\0')
+		{
+			if (line[i] == line[j])
+			{
+				//shift array to one element left
+				for (int pos = j; line[pos] != '\0'; pos++)
+				{
+					line[pos] = line[pos + 1];
+				}
+			}
+			else
+			{
+				j++;
+			}
+		}
+		i++;
+		j = i + 1;
+	}
 
+	//printf("\nDeduplicated pattern is: \n%s\n", line);
 	return;
 }
