@@ -13,6 +13,7 @@ or-1 if s1 contains no characters from s2
 // ###########################################################################
 
 int getline(char s[], int lim);
+int any(const char source[], const char pattern[]);
 
 
 int main()
@@ -25,6 +26,8 @@ int main()
 
 	printf("\nInput chars to find in main string:\n");
 	getline(string_to_find, MAXSIZE);
+
+	any(main_string, string_to_find);
 
 	return EXIT_SUCCESS;
 }
@@ -43,4 +46,11 @@ int getline(char s[], int lim)
 	}
 	s[end_of_line] = '\0';
 	return i;
+}
+
+
+int any(const char source[], const char pattern[])
+{
+
+	return 0;
 }
