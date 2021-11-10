@@ -21,6 +21,7 @@ int main()
 {
 	char main_string[MAXSIZE];
 	char string_to_find[MAXSIZE];
+	int test_result = 0;
 
 	/*
 	printf("Input main string no longer than %d symbols:\n", (MAXSIZE - 1));
@@ -32,9 +33,23 @@ int main()
 
 	//any(main_string, string_to_find);
 
-	int test1_result = any_test("aleksandra yanum", "knky", 3);
-	printf("Test1 %s \n", test1_result == 1 ? "passed" : "failed");
+	test_result = any_test("aleksandra yanum", "knky", 3);
+	printf("Test1 %s \n", test_result == 1 ? "passed" : "failed");
 
+	test_result = any_test("", "knky", -1);
+	printf("Test2 %s \n", test_result == 1 ? "passed" : "failed");
+
+	test_result = any_test("vlad yanum", "", -1);
+	printf("Test3 %s \n", test_result == 1 ? "passed" : "failed");
+
+	test_result = any_test("", "", -1);
+	printf("Test4 %s \n", test_result == 1 ? "passed" : "failed");
+
+	test_result = any_test("qwetyqwerty", "rt", 3);
+	printf("Test5 %s \n", test_result == 1 ? "passed" : "failed");
+
+	test_result = any_test("aleksandra", "bmw", -1);
+	printf("Test6 %s \n", test_result == 1 ? "passed" : "failed");
 
 	return EXIT_SUCCESS;
 }
@@ -59,7 +74,7 @@ int getline(char s[], int lim)
 int any(const char source[], const char pattern[])
 {
 
-	return 0;
+	return -99;
 }
 
 
