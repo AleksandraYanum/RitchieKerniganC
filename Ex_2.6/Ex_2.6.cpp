@@ -69,7 +69,5 @@ void print_bit(unsigned int number)
 		putchar((number_and_mask == 0) ? '0' : '1');
 		mask = mask >> 1;	//shift 1 in mask to one pos right
 	}
-
-
 	return;
 }
