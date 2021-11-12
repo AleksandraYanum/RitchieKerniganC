@@ -3,6 +3,7 @@
 
 #define YES 1 //yes - insignificant bit
 #define NO 0 
+#define MAXSIZE 33 //size of array that will turned in binary numaber, 33 is to int value
 
 /*
 Program returns target_number with the bit_amount bits that begin at position pos_from set to the 
@@ -17,18 +18,41 @@ Program works with all unsigned int values (because uses (<< and ~) instead >>)
 
 unsigned int setbits(unsigned int target_number, int pos_from, int bit_amount, unsigned int source_number);
 void print_bit(unsigned int number, int print_leading_zeroes);
+int getline(char s[], int lim);
 
 // ###########################################################################
 
 int main()
 {
+	/*
 	unsigned int target_number = 0b10110101;
 	int bit_amount = 4;
 	int pos_from = 6;
 	unsigned int source_number = 0b11000111;
 	unsigned int result_number = 0;
+	*/
 
-	result_number = setbits(target_number, pos_from, bit_amount, source_number);
+	char source_number_arr[MAXSIZE];
+	char target_number_arr[MAXSIZE];
+	int bit_amount = 0;
+	int pos_from = -1;
+	unsigned int result_number = 0;
+
+	printf("Program returns target_number with the bit_amount bits that begin at position pos_from set to the rightmost bit_amount bits of source_number, leaving the otherbits unchanged.\nFor input use no more than %d symbols:\n", (MAXSIZE - 1));
+	printf("\nInput target number in binary view (0 and 1 only):\n");
+	getline(target_number_arr, MAXSIZE);
+
+	printf("\nInput source number in binary view (0 and 1 only):");
+	getline(source_number_arr, MAXSIZE);
+
+	printf("\nInput an amount of bits:\n");
+	scanf_s("%d", bit_amount);
+
+	printf("\nInput the position in target number:\n");
+	scanf_s("%d", pos_from);
+
+
+	//result_number = setbits(target_number, pos_from, bit_amount, source_number);
 	print_bit(result_number, YES);
 
 	return EXIT_SUCCESS;
@@ -87,4 +111,20 @@ void print_bit(unsigned int number, int print_leading_zeroes) //if print_leading
 		mask = mask >> 1;	//shift 1 in mask to one pos right
 	}
 	return;
+}
+
+
+int getline(char s[], int lim)
+{
+	int i;
+	int end_of_line = 0;
+	int c;
+
+	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; i++)
+	{
+		s[i] = c;
+		end_of_line = i + 1;
+	}
+	s[end_of_line] = '\0';
+	return i;
 }
