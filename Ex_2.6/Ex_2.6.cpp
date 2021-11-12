@@ -19,6 +19,7 @@ Program works with all unsigned int values (because uses (<< and ~) instead >>)
 unsigned int setbits(unsigned int target_number, int pos_from, int bit_amount, unsigned int source_number);
 void print_bit(unsigned int number, int print_leading_zeroes);
 int getline(char s[], int lim);
+unsigned int bintoi(char s[]);
 
 // ###########################################################################
 
@@ -37,13 +38,17 @@ int main()
 	int bit_amount = 0;
 	int pos_from = -1;
 	unsigned int result_number = 0;
+	unsigned int target_number = 0; //0b10110101;
+	unsigned int source_number = 0; //0b11000111;
 
 	printf("Program returns target_number with the bit_amount bits that begin at position pos_from set to the rightmost bit_amount bits of source_number, leaving the otherbits unchanged.\nFor input use no more than %d symbols:\n", (MAXSIZE - 1));
 	printf("\nInput target number in binary view (0 and 1 only):\n");
 	getline(target_number_arr, MAXSIZE);
+	target_number = bintoi(target_number_arr);
 
-	printf("\nInput source number in binary view (0 and 1 only):");
+	printf("\nInput source number in binary view (0 and 1 only):\n");
 	getline(source_number_arr, MAXSIZE);
+	source_number = bintoi(source_number_arr);
 
 	printf("\nInput an amount of bits:\n");
 	scanf_s("%d", &bit_amount);
@@ -51,8 +56,7 @@ int main()
 	printf("\nInput the position in target number:\n");
 	scanf_s("%d", &pos_from);
 
-
-	//result_number = setbits(target_number, pos_from, bit_amount, source_number);
+	result_number = setbits(target_number, pos_from, bit_amount, source_number);
 	print_bit(result_number, YES);
 
 	return EXIT_SUCCESS;
@@ -127,4 +131,10 @@ int getline(char s[], int lim)
 	}
 	s[end_of_line] = '\0';
 	return i;
+}
+
+
+unsigned int bintoi (char s[])
+{
+	return 0;
 }
