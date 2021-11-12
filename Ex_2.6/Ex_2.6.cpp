@@ -57,7 +57,7 @@ int main()
 	scanf_s("%d", &pos_from);
 
 	result_number = setbits(target_number, pos_from, bit_amount, source_number);
-	print_bit(result_number, YES);
+	print_bit(result_number, NO);
 
 	return EXIT_SUCCESS;
 }
@@ -136,5 +136,11 @@ int getline(char s[], int lim)
 
 unsigned int bintoi (char s[])
 {
-	return 0;
+	int number = 0;
+	for (int i = 0; s[i] >= '0' && s[i] <= '1'; i++)
+	{
+		number = 2 * number + (s[i] - '0');
+	}
+
+	return number;
 }
