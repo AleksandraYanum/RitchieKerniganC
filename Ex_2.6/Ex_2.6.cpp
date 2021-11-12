@@ -5,6 +5,7 @@
 Program returns target_number with the bit_amount bits that begin at position pos_from set to the 
 rightmost bit_amount bits of source_number, leaving the otherbits unchanged: 
 setbits(target_number, pos_from, bit_amount, source_number)
+Program works with all unsigned int values (because uses (<< and ~) instead >>)
 */
 
 //###########################################################################
