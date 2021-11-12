@@ -34,13 +34,17 @@ int main()
 unsigned int setbits(unsigned int target_number, int pos_from, int bit_amount, unsigned int source_number)
 {
 	unsigned int part_before_pos = 0;
+	unsigned int part_after_pos = 0;
 
 	//Mask rightmost bit_amount bits from sourse_number and move it to the pos_from in target_number
 	source_number = source_number & ~(~ (unsigned) 0 << bit_amount) << (pos_from + 1 - bit_amount); 
 
 	//Target_number can be represented as: part_before_pos + pos_from + part_after_pos
 	//Mask part_before_pos
-	part_before_pos = source_number & (~(unsigned)0 << (pos_from + 1));
+	part_before_pos = source_number & (~(unsigned) 0 << (pos_from + 1));
+
+	//Mask part_after_pos
+	part_after_pos = source_number & ~(~(unsigned) 0 << (pos_from + 1 - bit_amount));
 
 	return 0;
 }
