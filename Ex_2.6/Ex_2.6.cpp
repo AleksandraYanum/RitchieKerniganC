@@ -13,6 +13,7 @@ Program works with all unsigned int values (because uses (<< and ~) instead >>)
 // ###########################################################################
 
 unsigned long setbits(unsigned long target_number, int pos_from, int bit_amount, unsigned long source_number);
+void print_bit(unsigned long);
 
 // ###########################################################################
 
@@ -25,7 +26,8 @@ int main()
 	unsigned long result_number = 0;
 
 	result_number = setbits(target_number, pos_from, bit_amount, source_number);
-	printf("%d", result_number);
+	print_bit(result_number);
+
 	return EXIT_SUCCESS;
 }
 
@@ -50,4 +52,10 @@ unsigned long setbits(unsigned long target_number, int pos_from, int bit_amount,
 	target_number = part_before_pos | part_after_pos | source_number;
 
 	return target_number;
+}
+
+
+void print_bit(unsigned long)
+{
+	return;
 }
