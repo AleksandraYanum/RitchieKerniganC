@@ -12,18 +12,18 @@ Program works with all unsigned int values (because uses (<< and ~) instead >>)
 // functions
 // ###########################################################################
 
-unsigned long setbits(unsigned long target_number, int pos_from, int bit_amount, unsigned long source_number);
-void print_bit(unsigned long);
+unsigned int setbits(unsigned int target_number, int pos_from, int bit_amount, unsigned int source_number);
+void print_bit(unsigned int number);
 
 // ###########################################################################
 
 int main()
 {
-	unsigned long target_number = 0b10110101;
+	unsigned int target_number = 0b10110101;
 	int bit_amount = 4;
 	int pos_from = 6;
-	unsigned long source_number = 0b11000111;
-	unsigned long result_number = 0;
+	unsigned int source_number = 0b11000111;
+	unsigned int result_number = 0;
 
 	result_number = setbits(target_number, pos_from, bit_amount, source_number);
 	print_bit(result_number);
@@ -32,10 +32,10 @@ int main()
 }
 
 
-unsigned long setbits(unsigned long target_number, int pos_from, int bit_amount, unsigned long source_number)
+unsigned int setbits(unsigned int target_number, int pos_from, int bit_amount, unsigned int source_number)
 {
-	unsigned long part_before_pos = 0;
-	unsigned long part_after_pos = 0;
+	unsigned int part_before_pos = 0;
+	unsigned int part_after_pos = 0;
 
 	//Mask rightmost bit_amount bits from sourse_number and move it to the pos_from in target_number
 	source_number = (source_number & ~(~ 0u << bit_amount)) << (pos_from + 1 - bit_amount);
@@ -55,7 +55,21 @@ unsigned long setbits(unsigned long target_number, int pos_from, int bit_amount,
 }
 
 
-void print_bit(unsigned long)
+void print_bit(unsigned int number)
 {
+	unsigned int mask = 0;
+	unsigned int number_and_mask = 0;
+
+	printf("Bin number = ");
+	mask = ~(~ 0u >> 1);
+
+	for (int i = 0; i < 32; i++)
+	{
+		number_and_mask = number & mask;
+		putchar((number_and_mask == 0) ? '0' : '1');
+		mask = mask / 2;
+	}
+
+
 	return;
 }
