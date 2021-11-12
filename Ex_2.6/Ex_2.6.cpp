@@ -61,13 +61,13 @@ void print_bit(unsigned int number)
 	unsigned int number_and_mask = 0;
 
 	printf("Bin number = ");
-	mask = ~(~ 0u >> 1);
+	mask = ~(~ 0u >> 1);	//for ex mask = 1000..00
 
 	for (int i = 0; i < 32; i++)
 	{
 		number_and_mask = number & mask;
 		putchar((number_and_mask == 0) ? '0' : '1');
-		mask = mask / 2;
+		mask = mask >> 1;	//shift 1 in mask to one pos right
 	}
 
 
