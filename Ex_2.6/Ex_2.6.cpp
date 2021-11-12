@@ -63,7 +63,7 @@ void print_bit(unsigned int number)
 	printf("Bin number = ");
 	mask = ~(~ 0u >> 1);	//for ex mask = 1000..00
 
-	for (int i = 0; i < 32; i++)
+	for (int i = 0; i < sizeof(number) * 8; i++)
 	{
 		number_and_mask = number & mask;
 		putchar((number_and_mask == 0) ? '0' : '1');
