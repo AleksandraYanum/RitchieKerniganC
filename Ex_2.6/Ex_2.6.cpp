@@ -10,6 +10,7 @@ Program returns target_number with the bit_amount bits that begin at position po
 rightmost bit_amount bits of source_number, leaving the otherbits unchanged: 
 setbits(target_number, pos_from, bit_amount, source_number)
 Program works with all unsigned int values (because uses (<< and ~) instead >>)
+It is expected, that input doesnt go beyond the MAXSIZE
 */
 
 //###########################################################################
@@ -139,8 +140,7 @@ unsigned int bintoi (char s[])
 	int number = 0;
 	for (int i = 0; s[i] >= '0' && s[i] <= '1'; i++)
 	{
-		number = 2 * number + (s[i] - '0');
+		number = (number << 1) + (s[i] - '0'); //(number << 1) - fast equivalent of (number * 2)
 	}
-
 	return number;
 }
