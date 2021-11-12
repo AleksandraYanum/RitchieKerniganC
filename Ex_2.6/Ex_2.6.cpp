@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define YES 1 //yes - insignificant bit
+#define NO 0 
+
 /*
 Program returns target_number with the bit_amount bits that begin at position pos_from set to the 
 rightmost bit_amount bits of source_number, leaving the otherbits unchanged: 
@@ -13,7 +16,7 @@ Program works with all unsigned int values (because uses (<< and ~) instead >>)
 // ###########################################################################
 
 unsigned int setbits(unsigned int target_number, int pos_from, int bit_amount, unsigned int source_number);
-void print_bit(unsigned int number);
+void print_bit(unsigned int number, int print_leading_zeroes);
 
 // ###########################################################################
 
@@ -26,7 +29,7 @@ int main()
 	unsigned int result_number = 0;
 
 	result_number = setbits(target_number, pos_from, bit_amount, source_number);
-	print_bit(result_number);
+	print_bit(result_number, YES);
 
 	return EXIT_SUCCESS;
 }
@@ -55,18 +58,32 @@ unsigned int setbits(unsigned int target_number, int pos_from, int bit_amount, u
 }
 
 
-void print_bit(unsigned int number)
+void print_bit(unsigned int number, int print_leading_zeroes) //if print_leading_zeroes = 1 - print insignificant zeroes
 {
 	unsigned int mask = 0;
 	unsigned int number_and_mask = 0;
+	int is_bit_insignificant = YES;
 
 	printf("Bin number = ");
 	mask = ~(~ 0u >> 1);	//for ex mask = 1000..00
 
+	is_bit_insignificant = (print_leading_zeroes == 0) ? YES : NO;
 	for (int i = 0; i < sizeof(number) * 8; i++)
 	{
 		number_and_mask = number & mask;
-		putchar((number_and_mask == 0) ? '0' : '1');
+		if (number_and_mask == 0)
+		{
+			if (is_bit_insignificant == NO)
+			{
+				putchar('0');
+			}
+		}
+		else
+		{
+			putchar('1');
+			is_bit_insignificant = NO;
+		}
+		//putchar((number_and_mask == 0) ? '0' : '1');
 		mask = mask >> 1;	//shift 1 in mask to one pos right
 	}
 	return;
