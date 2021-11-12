@@ -26,14 +26,6 @@ unsigned int bintoi(char s[]);
 
 int main()
 {
-	/*
-	unsigned int target_number = 0b10110101;
-	int bit_amount = 4;
-	int pos_from = 6;
-	unsigned int source_number = 0b11000111;
-	unsigned int result_number = 0;
-	*/
-
 	char source_number_arr[MAXSIZE];
 	char target_number_arr[MAXSIZE];
 	int bit_amount = 0;
