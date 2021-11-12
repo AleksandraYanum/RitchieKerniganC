@@ -46,10 +46,10 @@ int main()
 	getline(source_number_arr, MAXSIZE);
 
 	printf("\nInput an amount of bits:\n");
-	scanf_s("%d", bit_amount);
+	scanf_s("%d", &bit_amount);
 
 	printf("\nInput the position in target number:\n");
-	scanf_s("%d", pos_from);
+	scanf_s("%d", &pos_from);
 
 
 	//result_number = setbits(target_number, pos_from, bit_amount, source_number);
