@@ -2,6 +2,8 @@
 #include <stdlib.h>
 
 #define MAXSIZE 33 //size of array that will turned in binary numaber, 33 is to int value
+#define YES 1 //yes - insignificant bit
+#define NO 0 
 
 /*
 Program returns target_number with the bit_amount bits that begin at position pos_from inverted 
@@ -15,6 +17,7 @@ Program returns target_number with the bit_amount bits that begin at position po
 int getline(char s[], int lim);
 unsigned int bintoi(char s[]);
 unsigned int invert(unsigned int target_number, int pos_from, int bit_amount);
+void print_bit(unsigned int number, int print_leading_zeroes);
 
 // ###########################################################################
 
@@ -37,6 +40,7 @@ int main()
 	scanf_s("%d", &pos_from);
 
 	result_number = invert(target_number, pos_from, bit_amount);
+	print_bit(result_number, NO);
 	
 	return EXIT_SUCCESS;
 }
@@ -73,4 +77,36 @@ unsigned int invert(unsigned int target_number, int pos_from, int bit_amount)
 {
 
 	return target_number;
+}
+
+
+void print_bit(unsigned int number, int print_leading_zeroes) //if print_leading_zeroes = 1 - print insignificant zeroes
+{
+	unsigned int mask = 0;
+	unsigned int number_and_mask = 0;
+	int is_bit_insignificant = YES;
+
+	printf("Bin number = ");
+	mask = ~(~0u >> 1);	//for ex mask = 1000..00
+
+	is_bit_insignificant = (print_leading_zeroes == 0) ? YES : NO;
+	for (int i = 0; i < sizeof(number) * 8; i++)
+	{
+		number_and_mask = number & mask;
+		if (number_and_mask == 0)
+		{
+			if (is_bit_insignificant == NO)
+			{
+				putchar('0');
+			}
+		}
+		else
+		{
+			putchar('1');
+			is_bit_insignificant = NO;
+		}
+		//putchar((number_and_mask == 0) ? '0' : '1');
+		mask = mask >> 1;	//shift 1 in mask to one pos right
+	}
+	return;
 }
