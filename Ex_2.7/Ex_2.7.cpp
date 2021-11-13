@@ -18,6 +18,7 @@ int getline(char s[], int lim);
 unsigned int bintoi(char s[]);
 unsigned int invert(unsigned int target_number, int pos_from, int bit_amount);
 void print_bit(unsigned int number, int print_leading_zeroes);
+unsigned int invert_test(unsigned int target_number, int pos_from, int bit_amount, unsigned int expected_target_number);
 
 // ###########################################################################
 
@@ -28,8 +29,15 @@ int main()
 	int bit_amount = 0;
 	int pos_from = -1;
 	unsigned int result_number = 0;
+	int test_result = 0;
 
-	printf("Input target number in binary view (0 and 1 only):\n");
+	test_result = invert_test(0b10110101, 4, 3, 0b10101001);
+	printf("Test1 %s \n", test_result == 1 ? "passed" : "failed");
+	
+	test_result = invert_test(0b11000101111, 10, 7, 0b00111011111);
+	printf("Test1 %s \n", test_result == 1 ? "passed" : "failed");
+
+	printf("\nInput target number in binary view (0 and 1 only):\n");
 	getline(target_number_arr, MAXSIZE);
 	target_number = bintoi(target_number_arr);
 
@@ -112,4 +120,12 @@ void print_bit(unsigned int number, int print_leading_zeroes) //if print_leading
 		mask = mask >> 1;	//shift 1 in mask to one pos right
 	}
 	return;
+}
+
+
+unsigned int invert_test(unsigned int target_number, int pos_from, int bit_amount, unsigned int expected_target_number)
+{
+	unsigned int actual_target_number = invert(target_number, pos_from, bit_amount);
+	unsigned int result = (actual_target_number == expected_target_number);
+	return result;
 }
