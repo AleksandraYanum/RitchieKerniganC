@@ -29,7 +29,7 @@ int main()
 	int pos_from = -1;
 	unsigned int result_number = 0;
 
-	printf("\Input target number in binary view (0 and 1 only):\n");
+	printf("\nInput target number in binary view (0 and 1 only):\n");
 	getline(target_number_arr, MAXSIZE);
 	target_number = bintoi(target_number_arr);
 
@@ -77,7 +77,7 @@ unsigned int invert(unsigned int target_number, int pos_from, int bit_amount)
 {
 	unsigned int mask = 0;
 
-	mask = ~(~0u << pos_from + 1);
+	mask = ~(~0u << bit_amount) << (pos_from + 1 - bit_amount);
 	target_number = target_number ^ mask;
 	return target_number;
 }
