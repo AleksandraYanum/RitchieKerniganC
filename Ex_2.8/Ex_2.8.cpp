@@ -7,8 +7,8 @@
 // functions
 // ###########################################################################
 
-unsigned int rightrot(unsigned int target_number, int bit_amount);
-unsigned int rightrot_test(unsigned int target_number, int bit_amount, unsigned int expected);
+unsigned int rightrot(unsigned int number, int bit_amount);
+unsigned int rightrot_test(unsigned int number, int bit_amount, unsigned int expected);
 
 int main()
 {
@@ -27,16 +27,22 @@ int main()
 }
 
 
-unsigned int rightrot(unsigned int target_number, int bit_amount)
+unsigned int rightrot(unsigned int number, int bit_amount)
 {
+	unsigned int number_to_left = 0;
+	unsigned int number_to_right = 0;
 
-	return 0;
+	number_to_left = number << (sizeof(number) * 8 - bit_amount);
+	number_to_right = number >> bit_amount;
+	number = number_to_left | number_to_right;
+
+	return number;
 }
 
 
-unsigned int rightrot_test(unsigned int target_number, int bit_amount, unsigned int expected)
+unsigned int rightrot_test(unsigned int number, int bit_amount, unsigned int expected)
 {
-	unsigned int actual = rightrot(target_number, bit_amount);
+	unsigned int actual = rightrot(number, bit_amount);
 	unsigned int result = (actual == expected);
 	return result;
 }
