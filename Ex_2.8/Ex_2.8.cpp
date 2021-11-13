@@ -10,6 +10,8 @@
 unsigned int rightrot(unsigned int number, int bit_amount);
 unsigned int rightrot_test(unsigned int number, int bit_amount, unsigned int expected);
 
+// ###########################################################################
+
 int main()
 {
 	int test_result = 0;
