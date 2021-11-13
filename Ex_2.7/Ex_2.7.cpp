@@ -21,12 +21,19 @@ int main()
 {
 	char target_number_arr[MAXSIZE];
 	unsigned int target_number = 0; 
+	int bit_amount = 0;
+	int pos_from = -1;
 
 	printf("\nInput target number in binary view (0 and 1 only):\n");
 	getline(target_number_arr, MAXSIZE);
 	target_number = bintoi(target_number_arr);
-	
 
+	printf("\nInput an amount of bits:\n");
+	scanf_s("%d", &bit_amount);
+
+	printf("\nInput the position in target number:\n");
+	scanf_s("%d", &pos_from);
+	
 	return EXIT_SUCCESS;
 }
 
