@@ -2,8 +2,7 @@
 #include <stdlib.h>
 
 #define MAXSIZE 33 //size of array that will turned in binary numaber, 33 is to int value
-#define YES 1 //yes - insignificant bit
-#define NO 0 
+enum boolean { NO, YES };
 
 /*
 Program returns target_number with the bit_amount bits that begin at position pos_from inverted 
