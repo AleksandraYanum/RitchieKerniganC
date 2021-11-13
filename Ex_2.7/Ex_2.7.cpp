@@ -29,7 +29,7 @@ int main()
 	int pos_from = -1;
 	unsigned int result_number = 0;
 
-	printf("\nInput target number in binary view (0 and 1 only):\n");
+	printf("Input target number in binary view (0 and 1 only):\n");
 	getline(target_number_arr, MAXSIZE);
 	target_number = bintoi(target_number_arr);
 
@@ -89,7 +89,7 @@ void print_bit(unsigned int number, int print_leading_zeroes) //if print_leading
 	unsigned int number_and_mask = 0;
 	int is_bit_insignificant = YES;
 
-	printf("Bin number = ");
+	printf("\nBin number = ");
 	mask = ~(~0u >> 1);	//for ex mask = 1000..00
 
 	is_bit_insignificant = (print_leading_zeroes == 0) ? YES : NO;
