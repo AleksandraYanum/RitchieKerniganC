@@ -31,11 +31,18 @@ unsigned int rightrot(unsigned int number, int bit_amount)
 {
 	unsigned int number_to_left = 0;
 	unsigned int number_to_right = 0;
+	int type_size = sizeof(number) * 8;
 
-	number_to_left = number << (sizeof(number) * 8 - bit_amount);
-	number_to_right = number >> bit_amount;
-	number = number_to_left | number_to_right;
-
+	if (bit_amount != type_size)
+	{
+		if (bit_amount > type_size)
+		{
+			bit_amount = bit_amount % type_size;
+		}
+		number_to_left = number << type_size - bit_amount;
+		number_to_right = number >> bit_amount;
+		number = number_to_left | number_to_right;
+	}
 	return number;
 }
 
