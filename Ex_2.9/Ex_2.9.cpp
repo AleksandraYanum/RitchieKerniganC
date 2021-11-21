@@ -20,6 +20,7 @@ int main()
 	return EXIT_SUCCESS;
 }
 
+// x &= (x - 1) is more effective than x >>= 1. Iteration count is equal to 1-bits count in number
 int bitcount(unsigned number)
 {
 	int count = 0;
