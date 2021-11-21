@@ -7,19 +7,28 @@
 // functions
 // ###########################################################################
 
-int lower(int c);
+int lower(char c);
 
 // ###########################################################################
 
 int main()
 {
-	
+	char symb;
+	while (((symb = getchar()) != EOF) && (symb != '\n'))
+	{
+		symb = lower(symb);
+		putchar(symb);
+	}
+
 	return EXIT_SUCCESS;
 }
 
-int lower(int c)
+int lower(char c)
 {
-
-	return 0;
+	if (c >= 'A' && c <= 'Z')
+	{
+		c = c + 'a' - 'A';
+	}
+	return c;
 }
 
