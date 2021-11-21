@@ -25,10 +25,15 @@ int main()
 
 int lower(char c)
 {
+	char lower_c = (c >= 'A' && c <= 'Z') ? (c + 'a' - 'A') : c;
+
+	/*
 	if (c >= 'A' && c <= 'Z')
 	{
 		c = c + 'a' - 'A';
 	}
-	return c;
+	*/
+
+	return lower_c;
 }
 
