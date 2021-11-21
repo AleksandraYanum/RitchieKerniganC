@@ -13,12 +13,19 @@ int bitcount(unsigned number);
 
 int main()
 {
+	unsigned bit_number = 0b1110;
+	int bit_count = bitcount(bit_number);
+	printf("Number of 1-bits is %d", bit_count);
 	
 	return EXIT_SUCCESS;
 }
 
 int bitcount(unsigned number)
 {
-
-	return 0;
+	int count = 0;
+	for (; number != 0; number &= (number - 1))
+	{
+		count++;
+	}
+	return count;
 }
