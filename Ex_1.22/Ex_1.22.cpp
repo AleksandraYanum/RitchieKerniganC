@@ -31,7 +31,7 @@ void symbol_handler();
 void wrap_handler();
 void print_array(int print_to); 
 void find_delimiter_limit_to_print();
-void init_array(int index_from, int index_to);
+void init_array(char array[], int index_from, int index_to);
 void array_left_shift(int left_pos_to_shift);
 int is_delimiter(char c);
 void shift_array_by_delimiter();
@@ -53,7 +53,7 @@ int find_vowel_position(int last_pos, int number);
 
 int main()
 {
-	init_array(0, MAXSIZE + 1);
+	init_array(symb_arr, 0, MAXSIZE + 1);
 
 	while ((c = getchar()) != EOF)
 	{
@@ -146,11 +146,11 @@ void print_array(int print_to)
 }
 
 
-void init_array(int index_from, int index_to)
+void init_array(char array[], int index_from, int index_to)
 {
 	for (int i = index_from; i < index_to; i++)
 	{
-		symb_arr[i] = 0;
+		array[i] = 0;
 	}
 	return;
 }
@@ -172,7 +172,7 @@ void shift_array_by_delimiter()
 	array_left_shift(pos_after_delimiter);
 	int last_symb = pos;
 	pos = (pos_after_delimiter > -1) ? (pos - pos_after_delimiter) : 0;
-	init_array(pos, last_symb);
+	init_array(symb_arr, pos, last_symb);
 	return;
 }
 
@@ -182,7 +182,7 @@ void shift_array_by_wrap()
 	array_left_shift(wrap_position);
 	int last_symb = pos;
 	pos = pos - wrap_position;
-	init_array(pos, last_symb);
+	init_array(symb_arr, pos, last_symb);
 	return;
 }
 
