@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 //binsearch: find 'number' in array and return its pos else -1
 
 # define SIZE 11
 
 int binsearch(int number, int array[], int amount);
-
 
 int main()
 {
@@ -17,7 +15,6 @@ int main()
 
 	pos = binsearch(number, array, SIZE);
 	printf("Number position is %d", pos);
-
 	return EXIT_SUCCESS;
 }
 
@@ -41,7 +38,6 @@ int binsearch(int number, int array[], int amount)
 			low_pos = mid + 1;
 		}
 	}
-
 	number_pos = (number == array[mid]) ? mid : -1;
 	return number_pos;
 }
