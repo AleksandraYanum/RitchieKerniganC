@@ -4,17 +4,18 @@
 
 //binsearch: find 'number' in array and return its pos else -1
 
+# define SIZE 11
+
 int binsearch(int number, int array[], int amount);
 
 
 int main()
 {
 	int pos = 0;
-	int number = 3;
-	int array[] = { 1, 3, 6, 8, 10, 12, 15, 14, 15, 20, 21 };
-	int amount = 11;
+	int number = 6;
+	int array[SIZE] = { 1, 3, 6, 8, 10, 12, 15, 16, 18, 20, 21 };
 
-	pos = binsearch(number, array, amount);
+	pos = binsearch(number, array, SIZE);
 	printf("Number position is %d", pos);
 
 	return EXIT_SUCCESS;
